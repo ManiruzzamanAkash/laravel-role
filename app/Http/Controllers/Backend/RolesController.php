@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -29,7 +30,8 @@ class RolesController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('backend.pages.roles.create', compact('permissions'));
+        $permission_groups = User::getpermissionGroups();
+        return view('backend.pages.roles.create', compact('permissions', 'permission_groups'));
     }
 
     /**
