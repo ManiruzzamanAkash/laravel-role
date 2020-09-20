@@ -2,7 +2,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Role Page - Admin Panel
+Admins - Admin Panel
 @endsection
 
 @section('styles')
@@ -21,10 +21,10 @@ Role Page - Admin Panel
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Roles</h4>
+                <h4 class="page-title pull-left">Admins</h4>
                 <ul class="breadcrumbs pull-left">
                     <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li><span>All Roles</span></li>
+                    <li><span>All Admins</span></li>
                 </ul>
             </div>
         </div>
@@ -41,10 +41,10 @@ Role Page - Admin Panel
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title float-left">Roles List</h4>
+                    <h4 class="header-title float-left">Admins List</h4>
                     <p class="float-right mb-2">
-                        @if (Auth::guard('admin')->user()->can('role.create'))
-                            <a class="btn btn-primary text-white" href="{{ route('admin.roles.create') }}">Create New Role</a>
+                        @if (Auth::guard('admin')->user()->can('admin.edit'))
+                            <a class="btn btn-primary text-white" href="{{ route('admin.admins.create') }}">Create New Admin</a>
                         @endif
                     </p>
                     <div class="clearfix"></div>
@@ -55,37 +55,38 @@ Role Page - Admin Panel
                                 <tr>
                                     <th width="5%">Sl</th>
                                     <th width="10%">Name</th>
-                                    <th width="60%">Permissions</th>
+                                    <th width="10%">Email</th>
+                                    <th width="40%">Roles</th>
                                     <th width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               @foreach ($roles as $role)
+                               @foreach ($admins as $admin)
                                <tr>
                                     <td>{{ $loop->index+1 }}</td>
-                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $admin->name }}</td>
+                                    <td>{{ $admin->email }}</td>
                                     <td>
-                                        @foreach ($role->permissions as $perm)
+                                        @foreach ($admin->roles as $role)
                                             <span class="badge badge-info mr-1">
-                                                {{ $perm->name }}
+                                                {{ $role->name }}
                                             </span>
                                         @endforeach
                                     </td>
                                     <td>
                                         @if (Auth::guard('admin')->user()->can('admin.edit'))
-                                            <a class="btn btn-success text-white" href="{{ route('admin.roles.edit', $role->id) }}">Edit</a>
+                                            <a class="btn btn-success text-white" href="{{ route('admin.admins.edit', $admin->id) }}">Edit</a>
                                         @endif
-
-                                        @if (Auth::guard('admin')->user()->can('admin.edit'))
-                                            <a class="btn btn-danger text-white" href="{{ route('admin.roles.destroy', $role->id) }}"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();">
-                                                Delete
-                                            </a>
-
-                                            <form id="delete-form-{{ $role->id }}" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: none;">
-                                                @method('DELETE')
-                                                @csrf
-                                            </form>
+                                        
+                                        @if (Auth::guard('admin')->user()->can('admin.delete'))
+                                        <a class="btn btn-danger text-white" href="{{ route('admin.admins.destroy', $admin->id) }}"
+                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $admin->id }}').submit();">
+                                            Delete
+                                        </a>
+                                        <form id="delete-form-{{ $admin->id }}" action="{{ route('admin.admins.destroy', $admin->id) }}" method="POST" style="display: none;">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
                                         @endif
                                     </td>
                                 </tr>
