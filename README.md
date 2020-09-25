@@ -10,8 +10,21 @@ This is a basic Laravel Project with Laravel Role Permission Management System.
 1. Install Seeders - `php artisan db:seed`
 1. Run Project - `php artisan serve`
 
-Since, there is any problem to seeder, Please import the .sql file directly. 
+Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/ManiruzzamanAkash/laravel-role/blob/master/database/sql/laravel_role.sql
 
+So, You've got the project of Laravel Role & Permission Management on your http://localhost:8000
+
+## Setup 2
+1. Login using Super Admin Credential - 
+    1. Username - superadmin
+    1. Password - 12345678
+1. Create Admin
+1. Create Role
+1. Assign Permission to Roles
+1. Assign Multiple Role to an admin
+
+## Learn More & Discussion
+https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
 
 
 
