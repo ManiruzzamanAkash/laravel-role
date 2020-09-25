@@ -5,7 +5,9 @@
  <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="index.html"><img src="{{ asset('backend/assets/images/icon/logo.png') }}" alt="logo"></a>
+            <a href="{{ route('admin.dashboard') }}">
+                <h2 class="text-white">Admin</h2> 
+            </a>
         </div>
     </div>
     <div class="main-menu">
