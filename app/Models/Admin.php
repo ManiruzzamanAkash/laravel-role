@@ -13,6 +13,13 @@ class Admin extends Authenticatable
     use Notifiable, HasRoles;
 
     /**
+     * Set the default guard for this model.
+     *
+     * @var string
+     */
+    protected $guard_name = 'admin';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
