@@ -1,27 +1,58 @@
 # Laravel Role Permission Management System - Laravel 7.x
 
-This is a basic Laravel Project with Laravel Role Permission Management System. 
+A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel.
 
-## Project Setup 
-1. Git clone - `https://github.com/ManiruzzamanAkash/laravel-role.git`
-1. Install Laravel Dependencies - `composer update`
-1. Create database - `laravel_role`
-1. Migrate Database - `php artisan migrate`
-1. Install Seeders - `php artisan db:seed`
-1. Run Project - `php artisan serve`
+## Requirements:
+- Laravel `7.x`
+- Spatie role permission package  `3.1.3`
+
+
+## Project Setup
+Git clone -
+```console
+git clone https://github.com/ManiruzzamanAkash/laravel-role.git
+```
+
+Go to folder -
+```console
+cd laravel-role
+```
+
+Install Laravel Dependencies -
+```console
+composer install
+```
+
+Create database called - `laravel_role`
+
+Create `.env` file by copying `.env.example` file
+
+Generate Artisan Key (If needed) -
+```console
+php artisan key:generate
+```
+
+Migrate Database with seeder -
+```console
+php artisan migrate --seed
+```
+
+Run Project - `php artisan serve`
 
 Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/ManiruzzamanAkash/laravel-role/blob/master/database/sql/laravel_role.sql
 
 So, You've got the project of Laravel Role & Permission Management on your http://localhost:8000
 
-## Setup 2
-1. Login using Super Admin Credential - 
-    1. Username - superadmin
-    1. Password - 12345678
-1. Create Admin
-1. Create Role
-1. Assign Permission to Roles
-1. Assign Multiple Role to an admin
+## How it works
+1. Login using Super Admin Credential -
+    1. Username - `superadmin`
+    1. Password - `12345678`
+2. Create Admin
+3. Create Role
+4. Assign Permission to Roles
+5. Assign Multiple Role to an admin
+6. Check by login with the new credentials.
+7. If you've not enough permission to do any task, you'll get a warning message.
 
 ## Learn More & Discussion
 https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
@@ -64,3 +95,16 @@ Dynamic Sidebar Manage
 [adminLoginImage]: https://i.ibb.co/4g4vs4g/7-Login-Page.png "7-Login-Page"
 [errorPageImage]: https://i.ibb.co/HYcvRH4/8-Error-Page-Handle.png "8 - Error Page Handling"
 [sidebarDyanamic]: https://i.ibb.co/Jpq6X8x/9-Sidebar-Manage-Dynamically.png "9-Sidebar-Manage-Dynamically"
+
+## Wanna talk with me
+Please mail me at - manirujjamanakash@gmail.com
+
+
+## Support
+If you like my work you may consider buying me a ☕ / 🍕
+
+<a href="https://www.patreon.com/maniruzzaman" target="_blank" title="Buy Me A Coffee"> <img src="https://camo.githubusercontent.com/45ce6667a35b63fd6a1ba6978d030a7f52ff5b1b262c5c8aa3ece29afc469ac8/68747470733a2f2f63646e2e6275796d6561636f666665652e636f6d2f627574746f6e732f76322f64656661756c742d7265642e706e67" alt="ManiruzzamanAkash" width="200" />
+ </a>
+
+## Contribution
+Contribution is open. Create Pull-request and I'll add it to the project if it's good enough.
