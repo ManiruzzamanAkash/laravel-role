@@ -1,10 +1,16 @@
-# Laravel Role Permission Management System - Laravel 7.x
+# Laravel Role Permission Management System - Laravel `7.x` `9.x`
 
 A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel.
 
 ## Requirements:
-- Laravel `7.x`
+- Laravel `7.x` | `9.x`
 - Spatie role permission package  `3.1.3`
+
+
+## Versions:
+- Laravel `7.x`
+    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel7.x
+    - Branch - https://github.com/ManiruzzamanAkash/laravel-role/tree/Laravel7.x  
 
 
 ## Project Setup
