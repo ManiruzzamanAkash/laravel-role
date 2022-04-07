@@ -3,14 +3,16 @@
 A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel.
 
 ## Requirements:
-- Laravel `7.x` | `9.x`
+- Laravel `7.x` | `9.7`
 - Spatie role permission package  `3.1.3`
 
 
 ## Versions:
-- Laravel `7.x`
+- Laravel `7.x` & PHP -`7.x`
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel7.x
-    - Branch - https://github.com/ManiruzzamanAkash/laravel-role/tree/Laravel7.x  
+    - Branch - https://github.com/ManiruzzamanAkash/laravel-role/tree/Laravel7.x
+
+- Laravel `9.7` & PHP - `8.x`
 
 
 ## Project Setup
@@ -65,7 +67,8 @@ https://devsenv.com/tutorials/laravel-role-permission-management-system-full-exa
 
 
 
-### Dashboard Page
+### Login & Dashboard Page
+![alt text][adminLoginImage]
 ![alt text][dashboardImage]
 
 ### Role Pages
@@ -83,8 +86,6 @@ Admin Create
 ![alt text][adminCreateImage]
 
 ### Other Pages
-Login Page
-![alt text][adminLoginImage]
 Custom Error Pages
 ![alt text][errorPageImage]
 Dynamic Sidebar Manage
