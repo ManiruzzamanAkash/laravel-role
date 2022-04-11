@@ -13,7 +13,7 @@
                     @csrf
                     <div class="login-form-head">
                         <h4>Sign In</h4>
-                        <p>Hello there, Sign in and start managing your Admin Template</p>
+                        <p>Hello there, Sign in and start managing your Admin Panel</p>
                     </div>
                     <div class="login-form-body">
                         @include('backend.layouts.partials.messages')
@@ -46,12 +46,12 @@
                                     <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
                                 </div>
                             </div>
-                            <div class="col-6 text-right">
+                            {{-- <div class="col-6 text-right">
                                 <a href="#">Forgot Password?</a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="submit-btn-area">
-                            <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
+                            <button id="form_submit" type="submit">Sign In <i class="ti-arrow-right"></i></button>
                         </div>
                     </div>
                 </form>
