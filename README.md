@@ -2,6 +2,12 @@
 
 A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel.
 
+**Live Demo:** http://laravel-role.herokuapp.com
+```
+Username - superadmin
+password - 12345678
+```
+
 ## Requirements:
 - Laravel `7.x` | `9.7`
 - Spatie role permission package  `3.1.3`
