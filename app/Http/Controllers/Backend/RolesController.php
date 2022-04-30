@@ -29,9 +29,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        // if (is_null($this->user) || !$this->user->can('role.view')) {
-        //     abort(403, 'Sorry !! You are Unauthorized to view any role !');
-        // }
+        if (is_null($this->user) || !$this->user->can('role.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any role !');
+        }
 
         $roles = Role::all();
         return view('backend.pages.roles.index', compact('roles'));
@@ -47,6 +47,7 @@ class RolesController extends Controller
         if (is_null($this->user) || !$this->user->can('role.create')) {
             abort(403, 'Sorry !! You are Unauthorized to create any role !');
         }
+
         $all_permissions  = Permission::all();
         $permission_groups = User::getpermissionGroups();
         return view('backend.pages.roles.create', compact('all_permissions', 'permission_groups'));
@@ -102,11 +103,11 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        // if (is_null($this->user) || !$this->user->can('role.edit')) {
-        //     abort(403, 'Sorry !! You are Unauthorized to edit any role !');
-        // }
+        if (is_null($this->user) || !$this->user->can('role.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any role !');
+        }
 
         $role = Role::findById($id, 'admin');
         $all_permissions = Permission::all();
@@ -121,11 +122,19 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        // if (is_null($this->user) || !$this->user->can('role.edit')) {
-        //     abort(403, 'Sorry !! You are Unauthorized to edit any role !');
-        // }
+        if (is_null($this->user) || !$this->user->can('role.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any role !');
+        }
+
+        // TODO: You can delete this in your local. This is for heroku publish.
+        // This is only for Super Admin role,
+        // so that no-one could delete or disable it by somehow.
+        if ($id === 1) {
+            session()->flash('error', 'Sorry !! You are not authorized to edit this role !');
+            return back();
+        }
 
         // Validation Data
         $request->validate([
@@ -153,12 +162,19 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         if (is_null($this->user) || !$this->user->can('role.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to delete any role !');
         }
 
+        // TODO: You can delete this in your local. This is for heroku publish.
+        // This is only for Super Admin role,
+        // so that no-one could delete or disable it by somehow.
+        if ($id === 1) {
+            session()->flash('error', 'Sorry !! You are not authorized to delete this role !');
+            return back();
+        }
 
         $role = Role::findById($id, 'admin');
         if (!is_null($role)) {

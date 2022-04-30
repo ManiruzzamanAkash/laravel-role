@@ -15,7 +15,6 @@ Admin Edit - Admin Panel
 </style>
 @endsection
 
-
 @section('admin-content')
 
 <!-- page title area start -->
@@ -23,7 +22,7 @@ Admin Edit - Admin Panel
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Admin Create</h4>
+                <h4 class="page-title pull-left">Admin Edit</h4>
                 <ul class="breadcrumbs pull-left">
                     <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ route('admin.admins.index') }}">All Admins</a></li>
@@ -46,7 +45,7 @@ Admin Edit - Admin Panel
                 <div class="card-body">
                     <h4 class="header-title">Edit Admin - {{ $admin->name }}</h4>
                     @include('backend.layouts.partials.messages')
-                    
+
                     <form action="{{ route('admin.admins.update', $admin->id) }}" method="POST">
                         @method('PUT')
                         @csrf
@@ -86,14 +85,14 @@ Admin Edit - Admin Panel
                                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required value="{{ $admin->username }}">
                             </div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Admin</button>
                     </form>
                 </div>
             </div>
         </div>
         <!-- data table end -->
-        
+
     </div>
 </div>
 @endsection

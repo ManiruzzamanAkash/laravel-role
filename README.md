@@ -7,6 +7,7 @@ A project which manage Role, Permissions and every actions of your Laravel appli
 Username - superadmin
 password - 12345678
 ```
+> **Note:** Don't try to modify the Super Admin (Role & admin) data, just for Heroku deployment.
 
 ## Requirements:
 - Laravel `7.x` | `9.7`
