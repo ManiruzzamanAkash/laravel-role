@@ -27,7 +27,7 @@ Git clone -
 git clone https://github.com/ManiruzzamanAkash/laravel-role.git
 ```
 
-Go to folder -
+Go to project folder -
 ```console
 cd laravel-role
 ```
@@ -51,7 +51,10 @@ Migrate Database with seeder -
 php artisan migrate --seed
 ```
 
-Run Project - `php artisan serve`
+Run Project -
+```php
+php artisan serve
+```
 
 Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/ManiruzzamanAkash/laravel-role/blob/master/database/sql/laravel_role.sql
 

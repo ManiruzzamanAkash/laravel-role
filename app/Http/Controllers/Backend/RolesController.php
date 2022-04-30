@@ -29,9 +29,9 @@ class RolesController extends Controller
      */
     public function index()
     {
-        if (is_null($this->user) || !$this->user->can('role.view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.view')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to view any role !');
+        // }
 
         $roles = Role::all();
         return view('backend.pages.roles.index', compact('roles'));
@@ -104,9 +104,9 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.edit')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to edit any role !');
+        // }
 
         $role = Role::findById($id, 'admin');
         $all_permissions = Permission::all();
@@ -123,9 +123,9 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403, 'Sorry !! You are Unauthorized to edit any role !');
-        }
+        // if (is_null($this->user) || !$this->user->can('role.edit')) {
+        //     abort(403, 'Sorry !! You are Unauthorized to edit any role !');
+        // }
 
         // Validation Data
         $request->validate([
