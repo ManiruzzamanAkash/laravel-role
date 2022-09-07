@@ -10,16 +10,7 @@ use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
-    public $user;
 
-
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::guard('admin')->user();
-            return $next($request);
-        });
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +18,10 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('permission.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any permission !');
+        }
+
         $permissions = Permission::all();
         return view('backend.pages.permissions.index', compact('permissions'));
     }
@@ -38,6 +33,10 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('permission.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any permission !');
+        }
+
         return view('backend.pages.permissions.create');
     }
 
@@ -49,6 +48,10 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('permission.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any permission !');
+        }
+
         // Validation Data
         $request->validate([
             'name' => 'required|max:100|unique:permissions',
@@ -88,6 +91,10 @@ class PermissionController extends Controller
      */
     public function edit(int $id)
     {
+        if (!Auth::user()->can('permission.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any permission !');
+        }
+
         $permission = Permission::find($id);
         return view('backend.pages.permissions.edit', compact('permission'));
     }
@@ -101,6 +108,9 @@ class PermissionController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('permission.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any permission !');
+        }
 
         // TODO: You can delete this in your local. This is for heroku publish.
         // This is only for Super Admin role,
@@ -139,7 +149,7 @@ class PermissionController extends Controller
      */
     public function destroy(int $id)
     {
-        if (is_null($this->user) || !$this->user->can('role.delete')) {
+        if (!Auth::user()->can('permission.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to delete any permission !');
         }
 
