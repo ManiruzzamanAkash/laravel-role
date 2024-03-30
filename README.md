@@ -20,6 +20,9 @@ password - 12345678
 - Laravel `9.7` & PHP - `8.x`
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel9.x
 
+- Laravel `11.x`
+    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel11.x
+
 ## Project Setup
 Git clone -
 ```console
