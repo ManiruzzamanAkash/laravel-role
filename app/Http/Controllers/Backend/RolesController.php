@@ -6,9 +6,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoleRequest;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -33,16 +33,9 @@ class RolesController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(RoleRequest $request): RedirectResponse
     {
         $this->checkAuthorization(auth()->user(), ['role.create']);
-
-        // Validation Data.
-        $request->validate([
-            'name' => 'required|max:100|unique:roles'
-        ], [
-            'name.requried' => 'Please give a role name'
-        ]);
 
         // Process Data.
         $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
@@ -58,31 +51,34 @@ class RolesController extends Controller
         return redirect()->route('admin.roles.index');
     }
 
-    public function edit(int $id): Renderable
+    public function edit(int $id): Renderable|RedirectResponse
     {
         $this->checkAuthorization(auth()->user(), ['role.edit']);
 
+        $role = Role::findById($id, 'admin');
+        if (!$role) {
+            session()->flash('error', 'Role not found.');
+            return back();
+        }
+
         return view('backend.pages.roles.edit', [
-            'role' => Role::findById($id, 'admin'),
+            'role' => $role,
             'all_permissions' => Permission::all(),
             'permission_groups' => User::getpermissionGroups(),
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(RoleRequest $request, int $id): RedirectResponse
     {
         $this->checkAuthorization(auth()->user(), ['role.edit']);
 
-        // Validation Data
-        $request->validate([
-            'name' => 'required|max:100|unique:roles,name,' . $id
-        ], [
-            'name.requried' => 'Please give a role name'
-        ]);
-
         $role = Role::findById($id, 'admin');
-        $permissions = $request->input('permissions');
+        if (!$role) {
+            session()->flash('error', 'Role not found.');
+            return back();
+        }
 
+        $permissions = $request->input('permissions');
         if (!empty($permissions)) {
             $role->name = $request->name;
             $role->save();
