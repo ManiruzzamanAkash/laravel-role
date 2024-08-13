@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequest;
 use App\Models\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -18,31 +18,24 @@ class AdminsController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['admin.view']);
 
-        $admins = Admin::all();
-        return view('backend.pages.admins.index', compact('admins'));
+        return view('backend.pages.admins.index', [
+            'admins' => Admin::all(),
+        ]);
     }
 
     public function create(): Renderable
     {
         $this->checkAuthorization(auth()->user(), ['admin.create']);
 
-        $roles = Role::all();
-        return view('backend.pages.admins.create', compact('roles'));
+        return view('backend.pages.admins.create', [
+            'roles' => Role::all(),
+        ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(AdminRequest $request): RedirectResponse
     {
         $this->checkAuthorization(auth()->user(), ['admin.create']);
 
-        // Validation Data.
-        $request->validate([
-            'name' => 'required|max:50',
-            'email' => 'required|max:100|email|unique:admins',
-            'username' => 'required|max:100|unique:admins',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        // Create New Admin.
         $admin = new Admin();
         $admin->name = $request->name;
         $admin->username = $request->username;
@@ -62,26 +55,18 @@ class AdminsController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['admin.edit']);
 
+        $admin = Admin::findOrFail($id);
         return view('backend.pages.admins.edit', [
-            'admin' => Admin::find($id),
+            'admin' => $admin,
             'roles' => Role::all(),
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(AdminRequest $request, int $id): RedirectResponse
     {
         $this->checkAuthorization(auth()->user(), ['admin.edit']);
 
-        // Create New Admin.
-        $admin = Admin::find($id);
-
-        // Validation Data.
-        $request->validate([
-            'name' => 'required|max:50',
-            'email' => 'required|max:100|email|unique:admins,email,' . $id,
-            'password' => 'nullable|min:6|confirmed',
-        ]);
-
+        $admin = Admin::findOrFail($id);
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->username = $request->username;
@@ -103,12 +88,7 @@ class AdminsController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['admin.delete']);
 
-        $admin = Admin::find($id);
-        if (!$admin) {
-            session()->flash('error', 'Admin not found.');
-            return back();
-        }
-
+        $admin = Admin::findOrFail($id);
         $admin->delete();
         session()->flash('success', 'Admin has been deleted.');
         return back();
