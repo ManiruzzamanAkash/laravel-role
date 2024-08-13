@@ -42,14 +42,20 @@ Role Create - Admin Panel
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Create New Role</h4>
-                    @include('backend.layouts.partials.messages')
-                    
                     <form action="{{ route('admin.roles.store') }}" method="POST">
                         @csrf
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <h4 class="header-title">Create New Role</h4>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="submit" class="btn btn-primary pr-4 pl-4">Save</button>
+                            </div>
+                        </div>
+                        @include('backend.layouts.partials.messages')
                         <div class="form-group">
                             <label for="name">Role Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter a Role Name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter a Role Name" required autofocus value="{{ old('name') }}">
                         </div>
 
                         <div class="form-group">
@@ -84,16 +90,13 @@ Role Create - Admin Panel
                                         @endforeach
                                         <br>
                                     </div>
-
                                 </div>
                                 @php  $i++; @endphp
                             @endforeach
-
-                            
                         </div>
-                       
-                        
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Role</button>
+
+                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save</button>
+                        <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary mt-4 pr-4 pl-4">Cancel</a>
                     </form>
                 </div>
             </div>
