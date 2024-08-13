@@ -44,7 +44,7 @@ Admin Create - Admin Panel
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Create New Role</h4>
+                    <h4 class="header-title">Create New Admin</h4>
                     @include('backend.layouts.partials.messages')
                     
                     <form action="{{ route('admin.admins.store') }}" method="POST">
@@ -52,29 +52,29 @@ Admin Create - Admin Panel
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="name">Admin Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required autofocus value="{{ old('name') }}">
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="email">Admin Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" required value="{{ old('email') }}">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Password" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-6">
                                 <label for="password">Assign Roles</label>
-                                <select name="roles[]" id="roles" class="form-control select2" multiple>
+                                <select name="roles[]" id="roles" class="form-control select2" multiple required>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach
@@ -82,11 +82,12 @@ Admin Create - Admin Panel
                             </div>
                             <div class="form-group col-md-6 col-sm-6">
                                 <label for="username">Admin Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required value="{{ old('username') }}">
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Admin</button>
+                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save</button>
+                        <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary mt-4 pr-4 pl-4">Cancel</a>
                     </form>
                 </div>
             </div>

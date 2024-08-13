@@ -52,21 +52,21 @@ Admin Edit - Admin Panel
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="name">Admin Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="{{ $admin->name }}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="{{ $admin->name }}" required autofocus>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="email">Admin Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{ $admin->email }}">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{ $admin->email }}" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="password">Password</label>
+                                <label for="password">Password (Optional)</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="password_confirmation">Confirm Password</label>
+                                <label for="password_confirmation">Confirm Password (Optional)</label>
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
                             </div>
                         </div>
@@ -74,7 +74,7 @@ Admin Edit - Admin Panel
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-6">
                                 <label for="password">Assign Roles</label>
-                                <select name="roles[]" id="roles" class="form-control select2" multiple>
+                                <select name="roles[]" id="roles" class="form-control select2" multiple required>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->name }}" {{ $admin->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
@@ -86,7 +86,8 @@ Admin Edit - Admin Panel
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Admin</button>
+                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save</button>
+                        <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary mt-4 pr-4 pl-4">Cancel</a>
                     </form>
                 </div>
             </div>
