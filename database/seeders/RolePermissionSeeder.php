@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Database\Seeders;
+
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -128,6 +132,8 @@ class RolePermissionSeeder extends Seeder
         if ($admin) {
             $admin->assignRole($roleSuperAdmin);
         }
+
+        $this->command->info('Roles and Permissions created successfully!');
     }
 
     private function maybeCreateSuperAdminRole($admin): Role

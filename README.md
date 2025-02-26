@@ -11,6 +11,7 @@ password - 12345678
 ## Requirements:
 - Laravel `7.x` | `9.7` | `11.x` | `12.x`
 - Spatie role permission package  `^6.4`
+- PHPUnit test package `^11.x`
 
 ## Versions:
 - Laravel `7.x` & PHP -`7.x`
@@ -23,7 +24,7 @@ password - 12345678
 - Laravel `11.x`
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/v11.x-main
 
-- Laravel `12.x`
+- Laravel `12.x` & PHP >= `8.3`
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x
 
 ## Project Setup
