@@ -1,4 +1,4 @@
-# Laravel Role Permission Management System - Laravel `11.x`
+# Laravel Role Permission Management System - Laravel `12.x`
 
 A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel.
 
@@ -9,7 +9,7 @@ password - 12345678
 ```
 
 ## Requirements:
-- Laravel `7.x` | `9.7` | `11.x`
+- Laravel `7.x` | `9.7` | `11.x` | `12.x`
 - Spatie role permission package  `^6.4`
 
 ## Versions:
@@ -21,7 +21,10 @@ password - 12345678
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel9.x
 
 - Laravel `11.x`
-    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel11.x
+    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/v11.x-main
+
+- Laravel `12.x`
+    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x
 
 ## Project Setup
 Git clone -
@@ -50,7 +53,7 @@ php artisan key:generate
 
 Migrate Database with seeder -
 ```console
-php artisan migrate --seed
+php artisan migrate:fresh --seed
 ```
 
 Run Project -
