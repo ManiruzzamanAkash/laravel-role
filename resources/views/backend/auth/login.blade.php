@@ -19,7 +19,7 @@
                         @include('backend.layouts.partials.messages')
                         <div class="form-gp">
                             <label for="exampleInputEmail1">Email address or Username</label>
-                            <input type="text" id="exampleInputEmail1" name="email">
+                            <input type="text" id="exampleInputEmail1" name="email" value="{{ old('email', $email) }}">
                             <i class="ti-email"></i>
                             <div class="text-danger"></div>
                             @error('email')
@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-gp">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" id="exampleInputPassword1" name="password">
+                            <input type="password" id="exampleInputPassword1" name="password" value="{{ $password }}">
                             <i class="ti-lock"></i>
                             <div class="text-danger"></div>
                             @error('password')

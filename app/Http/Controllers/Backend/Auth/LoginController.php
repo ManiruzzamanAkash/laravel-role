@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,16 +34,19 @@ class LoginController extends Controller
     /**
      * show login form for admin guard
      *
-     * @return void
+     * @return Renderable
      */
-    public function showLoginForm()
+    public function showLoginForm(): Renderable
     {
-        return view('backend.auth.login');
+        $email = app()->environment('local') ? 'superadmin@example.com' : '';
+        $password = app()->environment('local') ? '12345678' : '';
+
+        return view('backend.auth.login')->with(compact('email', 'password'));
     }
 
 
     /**
-     * login admin
+     * Login admin.
      *
      * @param Request $request
      * @return void
@@ -51,23 +55,23 @@ class LoginController extends Controller
     {
         // Validate Login Data
         $request->validate([
-            'email' => 'required|max:50',
+            'email' => 'required|max:50|email',
             'password' => 'required',
         ]);
 
         // Attempt to login
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Redirect to dashboard
-            session()->flash('success', 'Successully Logged in !');
+            session()->flash('success', 'Successfully Logged in!');
             return redirect()->route('admin.dashboard');
         } else {
             // Search using username
             if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
-                session()->flash('success', 'Successully Logged in !');
+                session()->flash('success', 'Successfully Logged in!');
                 return redirect()->route('admin.dashboard');
             }
             // error
-            session()->flash('error', 'Invalid email and password');
+            session()->flash('error', 'Invalid email or password');
             return back();
         }
     }
