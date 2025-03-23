@@ -74,11 +74,13 @@
                     Sign In
                   </button>
                 </div>
+                @if (env('DEMO_MODE', true))
                 <div class="relative">
                   <button type="button" id="fill-demo-credentials" class="absolute top-0 right-0 px-3 py-1 text-xs font-medium text-white bg-gray-500 rounded shadow hover:bg-gray-600">
                     Fill with Demo
                   </button>
                 </div>
+                @endif
               </div>
             </form>
           </div>
@@ -120,11 +122,16 @@
   </div>
 @endsection
 
-@section('scripts')
-    <script>
-        document.getElementById('fill-demo-credentials').addEventListener('click', function() {
-            document.getElementById('email').value = 'superadmin@example.com';
-            document.querySelector('input[name="password"]').value = '12345678';
-        });
-    </script>
-@endsection
+@if (env('DEMO_MODE', true))
+    @section('scripts')
+        <script>
+            document.getElementById('fill-demo-credentials').addEventListener('click', function() {
+                document.getElementById('email').value = 'superadmin@example.com';
+                document.querySelector('input[name="password"]').value = '12345678';
+
+                // Submit the form.
+                document.querySelector('form').submit();
+            });
+        </script>
+    @endsection
+@endif
