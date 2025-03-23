@@ -18,8 +18,14 @@ class RolesController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['role.view']);
 
+        $query = Role::query();
+
+        if (request()->has('search') && request()->input('search') !== '') {
+            $query->where('name', 'like', '%' . request()->input('search') . '%');
+        }
+
         return view('backend.pages.roles.index', [
-            'roles' => Role::all(),
+            'roles' => $query->paginate(10),
         ]);
     }
 
