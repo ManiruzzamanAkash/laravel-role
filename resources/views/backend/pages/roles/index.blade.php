@@ -36,9 +36,9 @@
                     </a>
                 @endif
             </div>
-            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
+            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6 overflow-x-auto">
                 @include('backend.layouts.partials.messages')
-                <table id="dataTable" class="w-full min-w-[1102px] dark:text-gray-400">
+                <table id="dataTable" class="w-full dark:text-gray-400">
                     <thead class="bg-light text-capitalize">
                         <tr class="border-b border-gray-100 dark:border-gray-800">
                             <th width="5%">{{ __('Sl') }}</th>
@@ -59,10 +59,10 @@
                                         </span>
                                     @endforeach
                                 </td>
-                                <td class="px-5 py-4 sm:px-6 text-center">
+                                <td class="px-5 py-4 sm:px-6 text-center flex items-center justify-center">
                                     @if (Auth::user()->can('admin.edit'))
                                         <a title="Edit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="{{ route('admin.roles.edit', $role->id) }}">
-                                            <i class="ml-2 bi bi-pencil text-sm"></i>
+                                            <i class="ml-2 mb-2 bi bi-pencil text-sm"></i>
                                         </a>
                                     @endif
 

@@ -213,9 +213,9 @@
                         type="submit"
                         class="menu-item group w-full text-left"
                     >
-                        <i class="bi bi-box-arrow-right text-xl text-center"></i>
+                        <i class="bi bi-box-arrow-right text-xl text-center dark:text-white/90"></i>
                         <span
-                            class="menu-item-text"
+                            class="menu-item-text dark:text-white/90"
                             :class="sidebarToggle ? 'lg:hidden' : ''"
                         >
                             Logout

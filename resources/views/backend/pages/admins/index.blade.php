@@ -37,9 +37,9 @@
                     </a>
                 @endif
             </div>
-            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
+            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6 overflow-x-auto">
                 @include('backend.layouts.partials.messages')
-                <table id="dataTable" class="w-full min-w-[1102px] dark:text-gray-400">
+                <table id="dataTable" class="w-full dark:text-gray-400">
                     <thead class="bg-light text-capitalize">
                         <tr class="border-b border-gray-100 dark:border-gray-800">
                             <th width="5%">{{ __('Sl') }}</th>
@@ -93,10 +93,16 @@
 
 @section('scripts')
 <script>
-    if (document.getElementById('dataTable')) {
-        new DataTable('#dataTable', {
-            responsive: true
-        });
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+        if (document.getElementById('dataTable')) {
+            new DataTable('#dataTable', {
+                responsive: true,
+                autoWidth: false, // Ensure columns adjust properly
+                columnDefs: [
+                    { targets: 'no-sort', orderable: false } // Add this if you have non-sortable columns
+                ]
+            });
+        }
+    });
 </script>
 @endsection
