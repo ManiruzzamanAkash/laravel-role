@@ -53,7 +53,7 @@
                     </a>
                 @endif
             </div>
-            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6 overflow-x-auto">
+            <div class="p-3 space-y-3 border-t border-gray-100 dark:border-gray-800 sm:p-3 overflow-x-auto">
                 @include('backend.layouts.partials.messages')
                 <table id="dataTable" class="w-full dark:text-gray-400">
                     <thead class="bg-light text-capitalize">

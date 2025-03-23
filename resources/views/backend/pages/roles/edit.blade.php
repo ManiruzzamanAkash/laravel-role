@@ -89,6 +89,7 @@ Edit Role - Admin Panel
                         <label
                             for="{{ $i }}Management" class="capitalize flex items-center text-sm font-medium text-gray-700 cursor-pointer select-none dark:text-gray-400"
                             title="Toggle all permissions in this group"
+                            id="role-{{ $i }}-management-checkbox"
                             onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)"
                         >
                             <input
@@ -124,7 +125,7 @@ Edit Role - Admin Panel
                 @endforeach
             </div>
 
-            <div class="mt-6 flex justify-end gap-4">
+            <div class="mt-6 flex justify-start gap-4">
                 <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600">Save</button>
                 <a href="{{ route('admin.roles.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-white">Cancel</a>
             </div>

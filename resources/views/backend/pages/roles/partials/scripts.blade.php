@@ -14,11 +14,21 @@
         });
 
         function checkPermissionByGroup(className, checkThis) {
-            const groupIdName = document.getElementById(checkThis.id);
-            const classCheckBoxes = document.querySelectorAll(`.${className} input`);
+            const groupInput = checkThis.querySelector('input[type="checkbox"]');
+            if (!groupInput) {
+                console.error(`Checkbox input not found inside label with ID ${checkThis.id}.`);
+                return;
+            }
+
+            const isChecked = groupInput.checked;
+            const classCheckBoxes = document.querySelectorAll(`.${className} input[type="checkbox"]`);
+            if (!classCheckBoxes.length) {
+                console.error(`No checkboxes found for class ${className}.`);
+                return;
+            }
 
             classCheckBoxes.forEach(checkbox => {
-                checkbox.checked = groupIdName.checked;
+                checkbox.checked = isChecked;
             });
 
             implementAllChecked();
