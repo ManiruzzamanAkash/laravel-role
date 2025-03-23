@@ -20,8 +20,20 @@ class AdminsController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['admin.view']);
 
+        // Search functionality
+        $query = Admin::query();
+        $search = request()->input('search');
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('username', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        }
+
+        // Sort functionality
+        $admins = $query->latest()->paginate(10);
+
         return view('backend.pages.admins.index', [
-            'admins' => Admin::latest()->get(),
+            'admins' => $admins,
         ]);
     }
 
