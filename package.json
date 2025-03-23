@@ -2,12 +2,37 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "build": "vite build",
+        "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
-        "build": "vite build"
+        "format": "prettier --write resources/",
+        "format:check": "prettier --check resources/",
+        "lint": "eslint . --fix",
+        "types": "tsc --noEmit"
     },
     "devDependencies": {
+        "@eslint/js": "^9.19.0",
+        "@tailwindcss/vite": "^4.0.15",
         "axios": "^1.7.4",
+        "eslint": "^9.17.0",
+        "eslint-config-prettier": "^10.0.1",
         "laravel-vite-plugin": "^1.2",
+        "tailwindcss": "^4.0.15",
         "vite": "^6.2"
+    },
+    "dependencies": {
+        "@alpinejs/persist": "^3.14.9",
+        "@vitejs/plugin-react": "^4.3.4",
+        "alpinejs": "^3.14.9",
+        "apexcharts": "^4.5.0",
+        "bootstrap-icons": "^1.11.3",
+        "dropzone": "^6.0.0-beta.2",
+        "flatpickr": "^4.6.13",
+        "fullcalendar": "^6.1.15",
+        "jsvectormap": "^1.6.0",
+        "tailwind-merge": "^3.0.1",
+        "tailwindcss": "^4.0.0",
+        "tailwindcss-animate": "^1.0.7",
+        "vite": "^6.0"
     }
 }
