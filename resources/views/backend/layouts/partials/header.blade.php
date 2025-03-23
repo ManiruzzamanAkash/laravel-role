@@ -38,7 +38,7 @@
                 />
                 <img
                     class="hidden dark:block w-32"
-                    src="/images/logo/lara-admin.png"
+                    src="/images/logo/lara-admin-dark.png"
                     alt="Logo"
                 />
             </a>
