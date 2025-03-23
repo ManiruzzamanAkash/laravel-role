@@ -198,95 +198,31 @@
                 <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
-                    d="M5.99915 10.2451C6.96564 10.2451 7.74915 11.0286 7.74915 11.9951V12.0051C7.74915 12.9716 6.96564 13.7551 5.99915 13.7551C5.03265 13.7551 4.24915 12.9716 4.24915 12.0051V11.9951C4.24915 11.0286 5.03265 10.2451 5.99915 10.2451ZM17.9991 10.2451C18.9656 10.2451 19.7491 11.0286 19.7491 11.9951V12.0051C19.7491 12.9716 18.9656 13.7551 17.9991 13.7551C17.0326 13.7551 16.2491 12.9716 16.2491 12.0051V11.9951C16.2491 11.0286 17.0326 10.2451 17.9991 10.2451ZM13.7491 11.9951C13.7491 11.0286 12.9656 10.2451 11.9991 10.2451C11.0326 10.2451 10.2491 11.0286 10.2491 11.9951V12.0051C10.2491 12.9716 11.0326 13.7551 11.9991 13.7551C12.9656 13.7551 13.7491 12.9716 13.7491 12.0051V11.9951Z"
+                    d="M5.99915 10.2451C6.96564 10.2451 7.74915 11.0286 7.74915 11.9951V12.0051C7.74915 12.9716 6.96564 13.7551 5.99915 13.7551C5.03265 13.7551 4.24915 12.9716 4.24915 12.0051V11.9951C4.24915 11.0286 5.03265 10.2451 5.99915 10.2451ZM17.9991 10.2451C18.9656 10.2451 19.7491 11.0286 19.7491 11.9951V12.0051C19.7491 12.9716 18.9656 13.7551 17.9991 13.7551C17.0326 13.7551 16.2491 12.9716 16.2491 12.0051V11.9951C16.2491 11.0286 17.0326 10.2451 17.9991 10.2451ZM13.7491 11.9951C13.7491 11.0286 12.9656 10.2451 11.9991 10.2451C11.0326 10.2451 10.2491 11.0286 10.2491 11.9951V12.0051C10.2491 12.9716 11.0326 13.7551 11.9991 13.7551C12.9656 13.7551 13.7491 12.9716 13.7491 11.9951V11.9951Z"
                     fill=""
                 />
             </svg>
         </h3>
 
         <ul class="flex flex-col gap-4 mb-6">
-            <!-- Menu Item Charts -->
+            <!-- Logout Menu Item -->
             <li>
-                <a
-                    href="#"
-                    @click.prevent="selected = (selected === 'Charts' ? '':'Charts')"
-                    class="menu-item group"
-                    :class="(selected === 'Charts') || (page === 'lineChart' || page === 'barChart' || page === 'pieChart') ? 'menu-item-active' : 'menu-item-inactive'"
-                >
-                    <svg
-                        :class="(selected === 'Charts') || (page === 'lineChart' || page === 'barChart' || page === 'pieChart') ? 'menu-item-icon-active'  :'menu-item-icon-inactive'"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button
+                        type="submit"
+                        class="menu-item group w-full text-left"
                     >
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M12 2C11.5858 2 11.25 2.33579 11.25 2.75V12C11.25 12.4142 11.5858 12.75 12 12.75H21.25C21.6642 12.75 22 12.4142 22 12C22 6.47715 17.5228 2 12 2ZM12.75 11.25V3.53263C13.2645 3.57761 13.7659 3.66843 14.25 3.80098V3.80099C15.6929 4.19606 16.9827 4.96184 18.0104 5.98959C19.0382 7.01734 19.8039 8.30707 20.199 9.75C20.3316 10.2341 20.4224 10.7355 20.4674 11.25H12.75ZM2 12C2 7.25083 5.31065 3.27489 9.75 2.25415V3.80099C6.14748 4.78734 3.5 8.0845 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5C15.9155 20.5 19.2127 17.8525 20.199 14.25H21.7459C20.7251 18.6894 16.7492 22 12 22C6.47715 22 2 17.5229 2 12Z"
-                            fill=""
-                        />
-                    </svg>
-
-                    <span
-                        class="menu-item-text"
-                        :class="sidebarToggle ? 'lg:hidden' : ''"
-                    >
-                        Charts
-                    </span>
-
-                    <svg
-                        class="menu-item-arrow absolute right-2.5 top-1/2 -translate-y-1/2 stroke-current"
-                        :class="[(selected === 'Charts') ? 'menu-item-arrow-active' : 'menu-item-arrow-inactive', sidebarToggle ? 'lg:hidden' : '' ]"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M4.79175 7.39584L10.0001 12.6042L15.2084 7.39585"
-                            stroke=""
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
-                </a>
-
-                <!-- Dropdown Menu Start -->
-                <div
-                    class="overflow-hidden transform translate"
-                    :class="(selected === 'Charts') ? 'block' :'hidden'"
-                >
-                    <ul
-                        :class="sidebarToggle ? 'lg:hidden' : 'flex'"
-                        class="flex flex-col gap-1 mt-2 menu-dropdown pl-9"
-                    >
-                        <li>
-                            <a
-                                href="line-chart.html"
-                                class="menu-dropdown-item group"
-                                :class="page === 'lineChart' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                            >
-                                Line Chart
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="bar-chart.html"
-                                class="menu-dropdown-item group"
-                                :class="page === 'barChart' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                            >
-                                Bar Chart
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Dropdown Menu End -->
+                        <i class="bi bi-box-arrow-right text-xl text-center"></i>
+                        <span
+                            class="menu-item-text"
+                            :class="sidebarToggle ? 'lg:hidden' : ''"
+                        >
+                            Logout
+                        </span>
+                    </button>
+                </form>
             </li>
-            <!-- Menu Item Charts -->
         </ul>
     </div>
 </nav>
