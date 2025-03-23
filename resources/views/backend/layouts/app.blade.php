@@ -11,6 +11,7 @@
   <link rel="icon" href="favicon.ico">
     @viteReactRefresh
     @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @yield('styles')
 </head>
   <body
     x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -68,28 +69,6 @@
     class="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar"
   >
     @include('backend.layouts.partials.sidebar-menu')
-
-    <!-- Promo Box -->
-    <div
-      :class="sidebarToggle ? 'lg:hidden' : ''"
-      class="mx-auto mb-10 w-full max-w-60 rounded-2xl bg-gray-50 px-4 py-5 text-center dark:bg-white/[0.03]"
-    >
-      <h3 class="mb-2 font-semibold text-gray-900 dark:text-white">
-        #1 Tailwind CSS Dashboard
-      </h3>
-      <p class="mb-4 text-gray-500 text-theme-sm dark:text-gray-400">
-        Leading Tailwind CSS Admin Template with 400+ UI Component and Pages.
-      </p>
-      <a
-        href="https://tailadmin.com/pricing"
-        target="_blank"
-        rel="nofollow"
-        class="flex items-center justify-center p-3 font-medium text-white rounded-lg bg-brand-500 text-theme-sm hover:bg-brand-600"
-      >
-        Purchase Plan
-      </a>
-    </div>
-    <!-- Promo Box -->
   </div>
 </aside>
 
@@ -870,16 +849,11 @@
 
         <!-- ===== Main Content Start ===== -->
         <main>
-          <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-            <div class="grid grid-cols-12 gap-4 md:gap-6">
-                @yield('admin-content')
-                <!-- <div class="col-span-12 space-y-6 xl:col-span-7">
-
-                </div> -->
-            </div>
-          </div>
+            @yield('admin-content')
         </main>
       </div>
     </div>
+
+    @yield('scripts')
 </body>
 </html>

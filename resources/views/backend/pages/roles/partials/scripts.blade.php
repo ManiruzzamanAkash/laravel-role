@@ -1,55 +1,52 @@
 <script>
-    /**
+    document.addEventListener("DOMContentLoaded", function () {
+        /**
          * Check all the permissions
          */
-         $("#checkPermissionAll").click(function(){
-             if($(this).is(':checked')){
-                 // check all the checkbox
-                 $('input[type=checkbox]').prop('checked', true);
-             }else{
-                 // un check all the checkbox
-                 $('input[type=checkbox]').prop('checked', false);
-             }
-         });
+        const checkPermissionAll = document.getElementById("checkPermissionAll");
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-         function checkPermissionByGroup(className, checkThis){
-            const groupIdName = $("#"+checkThis.id);
-            const classCheckBox = $('.'+className+' input');
+        checkPermissionAll.addEventListener("click", function () {
+            const isChecked = this.checked;
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
+        });
 
-            if(groupIdName.is(':checked')){
-                 classCheckBox.prop('checked', true);
-             }else{
-                 classCheckBox.prop('checked', false);
-             }
+        function checkPermissionByGroup(className, checkThis) {
+            const groupIdName = document.getElementById(checkThis.id);
+            const classCheckBoxes = document.querySelectorAll(`.${className} input`);
+
+            classCheckBoxes.forEach(checkbox => {
+                checkbox.checked = groupIdName.checked;
+            });
+
             implementAllChecked();
-         }
+        }
 
-         function checkSinglePermission(groupClassName, groupID, countTotalPermission) {
-            const classCheckbox = $('.'+groupClassName+ ' input');
-            const groupIDCheckBox = $("#"+groupID);
+        function checkSinglePermission(groupClassName, groupID, countTotalPermission) {
+            const classCheckBoxes = document.querySelectorAll(`.${groupClassName} input`);
+            const groupIDCheckBox = document.getElementById(groupID);
 
-            // if there is any occurance where something is not selected then make selected = false
-            if($('.'+groupClassName+ ' input:checked').length == countTotalPermission){
-                groupIDCheckBox.prop('checked', true);
-            }else{
-                groupIDCheckBox.prop('checked', false);
-            }
+            const checkedCount = Array.from(classCheckBoxes).filter(checkbox => checkbox.checked).length;
+
+            groupIDCheckBox.checked = (checkedCount === countTotalPermission);
+
             implementAllChecked();
-         }
+        }
 
-         function implementAllChecked() {
-             const countPermissions = {{ count($all_permissions) }};
-             const countPermissionGroups = {{ count($permission_groups) }};
+        function implementAllChecked() {
+            const countPermissions = {{ count($all_permissions) }};
+            const countPermissionGroups = {{ count($permission_groups) }};
+            const totalCheckboxes = countPermissions + countPermissionGroups;
 
-            //  console.log((countPermissions + countPermissionGroups));
-            //  console.log($('input[type="checkbox"]:checked').length);
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
 
-             if($('input[type="checkbox"]:checked').length >= (countPermissions + countPermissionGroups)){
-                $("#checkPermissionAll").prop('checked', true);
-            }else{
-                $("#checkPermissionAll").prop('checked', false);
-            }
-         }
+            checkPermissionAll.checked = (checkedCount >= totalCheckboxes);
+        }
 
-
+        // Expose functions to the global scope if needed
+        window.checkPermissionByGroup = checkPermissionByGroup;
+        window.checkSinglePermission = checkSinglePermission;
+    });
 </script>

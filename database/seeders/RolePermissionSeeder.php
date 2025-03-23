@@ -6,15 +6,13 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /**
  * Class RolePermissionSeeder.
  *
  * @see https://spatie.be/docs/laravel-permission/v5/basic-usage/multiple-guards
- *
- * @package App\Database\Seeds
  */
 class RolePermissionSeeder extends Seeder
 {
@@ -37,7 +35,6 @@ class RolePermissionSeeder extends Seeder
         // $roleEditor = Role::create(['name' => 'editor']);
         // $roleUser = Role::create(['name' => 'user']);
 
-
         // Permission List as array
         $permissions = [
 
@@ -46,7 +43,7 @@ class RolePermissionSeeder extends Seeder
                 'permissions' => [
                     'dashboard.view',
                     'dashboard.edit',
-                ]
+                ],
             ],
             [
                 'group_name' => 'blog',
@@ -57,7 +54,7 @@ class RolePermissionSeeder extends Seeder
                     'blog.edit',
                     'blog.delete',
                     'blog.approve',
-                ]
+                ],
             ],
             [
                 'group_name' => 'admin',
@@ -68,7 +65,7 @@ class RolePermissionSeeder extends Seeder
                     'admin.edit',
                     'admin.delete',
                     'admin.approve',
-                ]
+                ],
             ],
             [
                 'group_name' => 'role',
@@ -79,7 +76,7 @@ class RolePermissionSeeder extends Seeder
                     'role.edit',
                     'role.delete',
                     'role.approve',
-                ]
+                ],
             ],
             [
                 'group_name' => 'profile',
@@ -89,10 +86,9 @@ class RolePermissionSeeder extends Seeder
                     'profile.edit',
                     'profile.delete',
                     'profile.update',
-                ]
+                ],
             ],
         ];
-
 
         // Create and Assign Permissions
         // for ($i = 0; $i < count($permissions); $i++) {
@@ -119,7 +115,7 @@ class RolePermissionSeeder extends Seeder
                         [
                             'name' => $permissions[$i]['permissions'][$j],
                             'group_name' => $permissionGroup,
-                            'guard_name' => 'admin'
+                            'guard_name' => 'admin',
                         ]
                     );
                     $roleSuperAdmin->givePermissionTo($permission);

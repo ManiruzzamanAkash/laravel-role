@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
-    use Notifiable, HasRoles, HasFactory;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * Set the default guard for this model.
@@ -71,7 +71,7 @@ class Admin extends Authenticatable
     public static function roleHasPermissions(Role $role, array $permissions): bool
     {
         foreach ($permissions as $permission) {
-            if (!$role->hasPermissionTo($permission->name)) {
+            if (! $role->hasPermissionTo($permission->name)) {
                 return false;
             }
         }

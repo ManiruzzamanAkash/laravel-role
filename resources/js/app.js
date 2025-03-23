@@ -1,9 +1,7 @@
 import './bootstrap';
-
 import "jsvectormap/dist/jsvectormap.min.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "dropzone/dist/dropzone.css";
-// import "../css/style.css";
 
 import Alpine from "alpinejs";
 import persist from "@alpinejs/persist";

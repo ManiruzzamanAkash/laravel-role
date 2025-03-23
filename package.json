@@ -30,6 +30,7 @@
         "flatpickr": "^4.6.13",
         "fullcalendar": "^6.1.15",
         "jsvectormap": "^1.6.0",
+        "simple-datatables": "^10.0.0",
         "tailwind-merge": "^3.0.1",
         "tailwindcss": "^4.0.0",
         "tailwindcss-animate": "^1.0.7",

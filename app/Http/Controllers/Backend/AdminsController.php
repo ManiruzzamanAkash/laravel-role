@@ -36,7 +36,7 @@ class AdminsController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['admin.create']);
 
-        $admin = new Admin();
+        $admin = new Admin;
         $admin->name = $request->name;
         $admin->username = $request->username;
         $admin->email = $request->email;
@@ -48,6 +48,7 @@ class AdminsController extends Controller
         }
 
         session()->flash('success', __('Admin has been created.'));
+
         return redirect()->route('admin.admins.index');
     }
 
@@ -56,6 +57,7 @@ class AdminsController extends Controller
         $this->checkAuthorization(auth()->user(), ['admin.edit']);
 
         $admin = Admin::findOrFail($id);
+
         return view('backend.pages.admins.edit', [
             'admin' => $admin,
             'roles' => Role::all(),
@@ -81,6 +83,7 @@ class AdminsController extends Controller
         }
 
         session()->flash('success', 'Admin has been updated.');
+
         return back();
     }
 
@@ -91,6 +94,7 @@ class AdminsController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->delete();
         session()->flash('success', 'Admin has been deleted.');
+
         return back();
     }
 }

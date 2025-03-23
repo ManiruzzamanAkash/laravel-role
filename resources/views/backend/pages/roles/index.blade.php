@@ -1,118 +1,85 @@
-
-@extends('backend.layouts.master')
+@extends('backend.layouts.app')
 
 @section('title')
-{{ __('Roles - Admin Panel') }}
-@endsection
-
-@section('styles')
-    <!-- Start datatable css -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+    {{ __('Roles - Admin Panel') }}
 @endsection
 
 @section('admin-content')
-
-<!-- page title area start -->
-<div class="page-title-area">
-    <div class="row align-items-center">
-        <div class="col-sm-6">
-            <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">{{ __('Roles') }}</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a></li>
-                    <li><span>{{ __('All Roles') }}</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-sm-6 clearfix">
-            @include('backend.layouts.partials.logout')
+<div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+    <div x-data="{ pageName: 'Roles' }">
+        <!-- Page Header -->
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName">Roles</h2>
+            <nav>
+                <ol class="flex items-center gap-1.5">
+                    <li>
+                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400" href="{{ route('admin.dashboard') }}">
+                            Home
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li class="text-sm text-gray-800 dark:text-white/90" x-text="pageName">Roles</li>
+                </ol>
+            </nav>
         </div>
     </div>
-</div>
-<!-- page title area end -->
 
-<div class="main-content-inner">
-    <div class="row">
-        <!-- data table start -->
-        <div class="col-12 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title float-left">{{ __('Roles') }}</h4>
-                    <p class="float-right mb-2">
-                        @if (Auth::user()->can('role.create'))
-                            <a class="btn btn-primary text-white" href="{{ route('admin.roles.create') }}">Create New Role</a>
-                        @endif
-                    </p>
-                    <div class="clearfix"></div>
-                    <div class="data-tables">
-                        @include('backend.layouts.partials.messages')
-                        <table id="dataTable" class="text-center">
-                            <thead class="bg-light text-capitalize">
-                                <tr>
-                                    <th width="5%">{{ __('Sl') }}</th>
-                                    <th width="10%">{{ __('Name') }}</th>
-                                    <th width="60%">{{ __('Permissions') }}</th>
-                                    <th width="15%">{{ __('Action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               @foreach ($roles as $role)
-                               <tr>
-                                    <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td>
-                                        @foreach ($role->permissions as $permission)
-                                            <span class="badge badge-info mr-1">
-                                                {{ $permission->name }}
-                                            </span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @if (auth::user()->can('admin.edit'))
-                                            <a class="btn btn-success text-white" href="{{ route('admin.roles.edit', $role->id) }}">Edit</a>
-                                        @endif
+    <!-- Roles Table -->
+    <div class="space-y-6">
+        <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+            <div class="px-5 py-4 sm:px-6 sm:py-5">
+                <h3 class="text-base font-medium text-gray-800 dark:text-white/90">Roles</h3>
+            </div>
+            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
+                @include('backend.layouts.partials.messages')
+                <table id="dataTable" class="w-full min-w-[1102px]">
+                    <thead class="bg-light text-capitalize">
+                        <tr class="border-b border-gray-100 dark:border-gray-800">
+                            <th width="5%">{{ __('Sl') }}</th>
+                            <th width="10%">{{ __('Name') }}</th>
+                            <th width="40%">{{ __('Permissions') }}</th>
+                            <th width="12%">{{ __('Action') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($roles as $role)
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="px-5 py-4 sm:px-6">{{ $loop->index + 1 }}</td>
+                                <td class="px-5 py-4 sm:px-6">{{ $role->name }}</td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    @foreach ($role->permissions as $permission)
+                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white">
+                                            {{ $permission->name }}
+                                        </span>
+                                    @endforeach
+                                </td>
+                                <td class="px-5 py-4 sm:px-6 text-center">
+                                    @if (Auth::user()->can('admin.edit'))
+                                        <a title="Edit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="{{ route('admin.roles.edit', $role->id) }}">
+                                            <i class="ml-2 bi bi-pencil text-sm"></i>
+                                        </a>
+                                    @endif
 
-                                        @if (auth::user()->can('admin.edit'))
-                                            <a class="btn btn-danger text-white" href="javascript:void(0);"
-                                                onclick="event.preventDefault(); if(confirm('Are you sure to delete?')) { document.getElementById('delete-form-{{ $role->id }}').submit(); }">
-                                                {{ __('Delete') }}
-                                            </a>
-
-                                            <form id="delete-form-{{ $role->id }}" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: none;">
-                                                @method('DELETE')
-                                                @csrf
-                                            </form>
-                                        @endif
-                                    </td>
-                                </tr>
-                               @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                    @if (Auth::user()->can('admin.edit'))
+                                        <a title="Delete" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="javascript:void(0);" onclick="event.preventDefault(); if(confirm('Are you sure to delete?')) { document.getElementById('delete-form-{{ $role->id }}').submit(); }">
+                                            <i class="ml-2 bi bi-trash text-sm"></i>
+                                        </a>
+                                        <form id="delete-form-{{ $role->id }}" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: none;">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- data table end -->
     </div>
 </div>
 @endsection
 
 @section('scripts')
-     <!-- Start datatable js -->
-     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-     
-     <script>
-        if ($('#dataTable').length) {
-            $('#dataTable').DataTable({
-                responsive: true
-            });
-        }
-     </script>
+<!-- Add any additional scripts here -->
 @endsection
