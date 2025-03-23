@@ -38,7 +38,7 @@
             </div>
             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                 @include('backend.layouts.partials.messages')
-                <table id="dataTable" class="w-full min-w-[1102px]">
+                <table id="dataTable" class="w-full min-w-[1102px] dark:text-gray-400">
                     <thead class="bg-light text-capitalize">
                         <tr class="border-b border-gray-100 dark:border-gray-800">
                             <th width="5%">{{ __('Sl') }}</th>

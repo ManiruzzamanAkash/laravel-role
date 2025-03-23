@@ -1,13 +1,13 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    {{ __('Admins - Admin Panel') }}
+    {{ __('Users - Admin Panel') }}
 @endsection
 
 @section('admin-content')
 
 <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-    <div x-data="{ pageName: 'Admins' }">
+    <div x-data="{ pageName: 'Users' }">
         <!-- Page Header -->
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName">Users</h2>
@@ -39,7 +39,7 @@
             </div>
             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                 @include('backend.layouts.partials.messages')
-                <table id="dataTable" class="w-full min-w-[1102px]">
+                <table id="dataTable" class="w-full min-w-[1102px] dark:text-gray-400">
                     <thead class="bg-light text-capitalize">
                         <tr class="border-b border-gray-100 dark:border-gray-800">
                             <th width="5%">{{ __('Sl') }}</th>
