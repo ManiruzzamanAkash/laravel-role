@@ -11,6 +11,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class AdminsController extends Controller
 {
@@ -96,5 +98,30 @@ class AdminsController extends Controller
         session()->flash('success', 'Admin has been deleted.');
 
         return back();
+    }
+
+    public function editProfile()
+    {
+        $admin = Auth::user();
+        return view('backend.pages.profile.edit', compact('admin'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $admin = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $admin->id,
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        $admin->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : $admin->password,
+        ]);
+
+        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
     }
 }

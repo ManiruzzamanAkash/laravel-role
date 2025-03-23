@@ -47,3 +47,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/password/reset/submit', [ForgotPasswordController::class, 'reset'])->name('password.update');
 })->middleware('auth:admin');
+
+/**
+ * Profile routes
+ */
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    Route::get('/edit', [AdminsController::class, 'editProfile'])->name('edit');
+    Route::put('/update', [AdminsController::class, 'updateProfile'])->name('update');
+});
