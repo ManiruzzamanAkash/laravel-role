@@ -22,7 +22,7 @@
                 />
             </span>
             <img
-                class="logo-icon"
+                class="logo-icon w-10 lg:w-12"
                 :class="sidebarToggle ? 'lg:block' : 'hidden'"
                 src="/images/logo/icon.png"
                 alt="Logo"
