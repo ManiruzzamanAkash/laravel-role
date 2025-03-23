@@ -1,29 +1,55 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@yield('auth_title', 'Authentication - Admin Panel')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
-    @include('backend.layouts.partials.styles')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@yield('title', 'Laravel Admin')</title>
+    <link rel="icon" href="favicon.ico">
+    @viteReactRefresh
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
     @yield('styles')
 </head>
 
-<body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-    <div id="preloader">
-        <div class="loader"></div>
+<body
+    x-data="{ page: 'ecommerce', loaded: true, darkMode: false, stickyMenu: false, sidebarToggle: false, scrollTop: false }"
+    x-init="
+        darkMode = JSON.parse(localStorage.getItem('darkMode'));
+        $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{ 'dark bg-gray-900': darkMode === true }"
+>
+    <!-- Preloader -->
+    <div
+        x-show="loaded"
+        x-init="window.addEventListener('DOMContentLoaded', () => { setTimeout(() => loaded = false, 500) })"
+        class="fixed left-0 top-0 z-999999 flex h-screen w-screen items-center justify-center bg-white dark:bg-black"
+    >
+        <div class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-brand-500 border-t-transparent"></div>
     </div>
-    <!-- preloader area end -->
-   
-    @yield('auth-content')
+    <!-- End Preloader -->
 
-    @include('backend.layouts.partials.scripts')
+    <!-- Page Wrapper -->
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Content Area -->
+        <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
+            <!-- Small Device Overlay -->
+            <div
+                @click="sidebarToggle = false"
+                :class="sidebarToggle ? 'block lg:hidden' : 'hidden'"
+                class="fixed w-full h-screen z-9 bg-gray-900/50"
+            ></div>
+            <!-- End Small Device Overlay -->
+
+            <!-- Main Content -->
+            <main>
+                @yield('admin-content')
+            </main>
+            <!-- End Main Content -->
+        </div>
+    </div>
+
     @yield('scripts')
 </body>
 
