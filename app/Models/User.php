@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use App\Traits\HasGravatar;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasRoles, Notifiable;
+    use HasFactory, HasRoles, Notifiable, HasGravatar;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +22,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'username',
     ];
 
     /**
@@ -29,7 +34,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        'email_verified_at',
     ];
 
     /**
@@ -43,35 +50,28 @@ class User extends Authenticatable
 
     public static function getpermissionGroups()
     {
-        $permission_groups = DB::table('permissions')
+        return DB::table('permissions')
             ->select('group_name as name')
             ->groupBy('group_name')
             ->get();
-
-        return $permission_groups;
     }
 
-    public static function getpermissionsByGroupName($group_name)
+    public static function getpermissionsByGroupName(string $group_name)
     {
-        $permissions = DB::table('permissions')
+        return DB::table('permissions')
             ->select('name', 'id')
             ->where('group_name', $group_name)
             ->get();
-
-        return $permissions;
     }
 
-    public static function roleHasPermissions($role, $permissions)
+    public static function roleHasPermissions(Role $role, $permissions): bool
     {
-        $hasPermission = true;
         foreach ($permissions as $permission) {
             if (! $role->hasPermissionTo($permission->name)) {
-                $hasPermission = false;
-
-                return $hasPermission;
+                return false;
             }
         }
 
-        return $hasPermission;
+        return true; // ensure returning true if all permissions are granted
     }
 }

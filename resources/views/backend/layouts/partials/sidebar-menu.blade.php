@@ -1,5 +1,5 @@
 @php
-    $usr = Auth::guard('admin')->user();
+    $usr = Auth::guard('web')->user();
 @endphp
 
 <nav x-data="{selected: $persist('Dashboard')}">
@@ -123,7 +123,7 @@
             </li>
             @endif
 
-            @if ($usr->can('admin.create') || $usr->can('admin.view') || $usr->can('admin.edit') || $usr->can('admin.delete'))
+            @if ($usr->can('user.create') || $usr->can('user.view') || $usr->can('user.edit') || $usr->can('user.delete'))
             <li>
                 <a href="#" @click.prevent="selected = (selected === 'Users' ? '' : 'Users')" class="menu-item group" :class="(selected === 'Users') ? 'menu-item-active' : 'menu-item-inactive'">
                     <i class="bi bi-person text-xl text-center"></i>
@@ -155,16 +155,16 @@
                 </a>
                 <div class="overflow-hidden transform translate" :class="(selected === 'Users') ? 'block' : 'hidden'">
                     <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'" class="flex flex-col gap-1 mt-2 menu-dropdown pl-9">
-                        @if ($usr->can('admin.view'))
+                        @if ($usr->can('user.view'))
                         <li>
-                            <a href="{{ route('admin.admins.index') }}" class="menu-dropdown-item group {{ Route::is('admin.admins.index') || Route::is('admin.admins.edit') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
+                            <a href="{{ route('admin.users.index') }}" class="menu-dropdown-item group {{ Route::is('admin.users.index') || Route::is('admin.users.edit') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
                                 Users
                             </a>
                         </li>
                         @endif
-                        @if ($usr->can('admin.create'))
+                        @if ($usr->can('user.create'))
                         <li>
-                            <a href="{{ route('admin.admins.create') }}" class="menu-dropdown-item group {{ Route::is('admin.admins.create') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
+                            <a href="{{ route('admin.users.create') }}" class="menu-dropdown-item group {{ Route::is('admin.users.create') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
                                 New User
                             </a>
                         </li>
@@ -183,7 +183,7 @@
                 class="menu-group-title"
                 :class="sidebarToggle ? 'lg:hidden' : ''"
             >
-                others
+                More
             </span>
 
             <svg

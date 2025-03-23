@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminsController;
+use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\RolesController;
+// use App\Http\Controllers\Backend\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('roles', RolesController::class);
-    Route::resource('admins', AdminsController::class);
+    Route::resource('users', UsersController::class);
 
     // Login Routes.
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -46,12 +47,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // Forget Password Routes.
     Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/password/reset/submit', [ForgotPasswordController::class, 'reset'])->name('password.update');
-})->middleware('auth:admin');
+})->middleware('auth');
 
 /**
  * Profile routes
  */
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-    Route::get('/edit', [AdminsController::class, 'editProfile'])->name('edit');
-    Route::put('/update', [AdminsController::class, 'updateProfile'])->name('update');
+    Route::get('/edit', [UsersController::class, 'editProfile'])->name('edit');
+    Route::put('/update', [UsersController::class, 'updateProfile'])->name('update');
 });

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -57,20 +57,18 @@ class RolePermissionSeeder extends Seeder
                 ],
             ],
             [
-                'group_name' => 'admin',
+                'group_name' => 'user',
                 'permissions' => [
-                    // admin Permissions
-                    'admin.create',
-                    'admin.view',
-                    'admin.edit',
-                    'admin.delete',
-                    'admin.approve',
+                    'user.create',
+                    'user.view',
+                    'user.edit',
+                    'user.delete',
+                    'user.approve',
                 ],
             ],
             [
                 'group_name' => 'role',
                 'permissions' => [
-                    // role Permissions
                     'role.create',
                     'role.view',
                     'role.edit',
@@ -81,7 +79,6 @@ class RolePermissionSeeder extends Seeder
             [
                 'group_name' => 'profile',
                 'permissions' => [
-                    // profile Permissions
                     'profile.view',
                     'profile.edit',
                     'profile.delete',
@@ -102,7 +99,7 @@ class RolePermissionSeeder extends Seeder
         // }
 
         // Do same for the admin guard for tutorial purposes.
-        $admin = Admin::where('username', 'superadmin')->first();
+        $admin = User::where('username', 'superadmin')->first();
         $roleSuperAdmin = $this->maybeCreateSuperAdminRole($admin);
 
         // Create and Assign Permissions
@@ -115,7 +112,7 @@ class RolePermissionSeeder extends Seeder
                         [
                             'name' => $permissions[$i]['permissions'][$j],
                             'group_name' => $permissionGroup,
-                            'guard_name' => 'admin',
+                            'guard_name' => 'web',
                         ]
                     );
                     $roleSuperAdmin->givePermissionTo($permission);
@@ -135,13 +132,13 @@ class RolePermissionSeeder extends Seeder
     private function maybeCreateSuperAdminRole($admin): Role
     {
         if (is_null($admin)) {
-            $roleSuperAdmin = Role::create(['name' => 'superadmin', 'guard_name' => 'admin']);
+            $roleSuperAdmin = Role::create(['name' => 'superadmin', 'guard_name' => 'web']);
         } else {
-            $roleSuperAdmin = Role::where('name', 'superadmin')->where('guard_name', 'admin')->first();
+            $roleSuperAdmin = Role::where('name', 'superadmin')->where('guard_name', 'web')->first();
         }
 
         if (is_null($roleSuperAdmin)) {
-            $roleSuperAdmin = Role::create(['name' => 'superadmin', 'guard_name' => 'admin']);
+            $roleSuperAdmin = Role::create(['name' => 'superadmin', 'guard_name' => 'web']);
         }
 
         return $roleSuperAdmin;

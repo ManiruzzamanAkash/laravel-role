@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-Dashboard Page - Admin Panel
+Dashboard Page - LaraAdmin
 @endsection
 
 @section('admin-content')
@@ -26,7 +26,7 @@ Dashboard Page - Admin Panel
                             <h4
                                 class="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90"
                             >
-                                {{ $total_admins }}
+                                {{ $total_users }}
                             </h4>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ Dashboard Page - Admin Panel
                     <div
                         class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800"
                     >
-                        <i class="bi bi-shield dark:text-white text-2xl"></i>
+                        <i class="bi bi-list-check dark:text-white text-2xl"></i>
                     </div>
 
                     <div class="mt-5 flex items-end justify-between">

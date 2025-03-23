@@ -76,13 +76,13 @@
                                     @endforeach
                                 </td>
                                 <td class="px-5 py-4 sm:px-6 text-center flex items-center justify-center">
-                                    @if (Auth::user()->can('admin.edit'))
+                                    @if (auth()->user()->can('user.edit'))
                                         <a title="Edit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="{{ route('admin.roles.edit', $role->id) }}">
                                             <i class="ml-2 mb-2 bi bi-pencil text-sm"></i>
                                         </a>
                                     @endif
 
-                                    @if (Auth::user()->can('admin.edit'))
+                                    @if (auth()->user()->can('user.edit'))
                                         <a title="Delete" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="javascript:void(0);" onclick="event.preventDefault(); if(confirm('Are you sure to delete?')) { document.getElementById('delete-form-{{ $role->id }}').submit(); }">
                                             <i class="ml-2 bi bi-trash text-sm"></i>
                                         </a>

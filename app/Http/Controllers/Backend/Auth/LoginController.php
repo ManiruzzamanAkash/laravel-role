@@ -56,14 +56,14 @@ class LoginController extends Controller
         ]);
 
         // Attempt to login
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Redirect to dashboard
             session()->flash('success', 'Successfully Logged in!');
 
             return redirect()->route('admin.dashboard');
         } else {
             // Search using username
-            if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
+            if (Auth::guard('web')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
                 session()->flash('success', 'Successfully Logged in!');
 
                 return redirect()->route('admin.dashboard');
@@ -82,7 +82,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('web')->logout();
 
         return redirect()->route('admin.login');
     }
