@@ -19,7 +19,7 @@ class AdminsController extends Controller
         $this->checkAuthorization(auth()->user(), ['admin.view']);
 
         return view('backend.pages.admins.index', [
-            'admins' => Admin::all(),
+            'admins' => Admin::latest()->get(),
         ]);
     }
 

@@ -27,8 +27,14 @@
     <!-- Roles Table -->
     <div class="space-y-6">
         <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="px-5 py-4 sm:px-6 sm:py-5">
+            <div class="px-5 py-4 sm:px-6 sm:py-5 flex justify-between items-center">
                 <h3 class="text-base font-medium text-gray-800 dark:text-white/90">Roles</h3>
+                @if (auth()->user()->can('role.create'))
+                    <a href="{{ route('admin.roles.create') }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        <i class="bi bi-plus-circle mr-2"></i>
+                        {{ __('New Role') }}
+                    </a>
+                @endif
             </div>
             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                 @include('backend.layouts.partials.messages')
