@@ -23,19 +23,7 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-
-        /**
-         * Enable these options if you need same role and other permission for User Model
-         * Else, please follow the below steps for admin guard
-         */
-
-        // Create Roles and Permissions
-        // $roleSuperAdmin = Role::create(['name' => 'superadmin']);
-        // $roleAdmin = Role::create(['name' => 'admin']);
-        // $roleEditor = Role::create(['name' => 'editor']);
-        // $roleUser = Role::create(['name' => 'user']);
-
-        // Permission List as array
+        // Permission List as array.
         $permissions = [
 
             [
@@ -99,8 +87,12 @@ class RolePermissionSeeder extends Seeder
         // }
 
         // Do same for the admin guard for tutorial purposes.
-        $admin = User::where('username', 'superadmin')->first();
-        $roleSuperAdmin = $this->maybeCreateSuperAdminRole($admin);
+        $user = User::where('username', 'superadmin')->first();
+        $roleSuperAdmin = $this->maybeCreateSuperAdminRole();
+
+        // Create Subscriber Role.
+        $userSubscriber = User::where('username', 'subscriber')->first();
+        $roleSubscriber = $this->maybeCreateSubscriberRole();
 
         // Create and Assign Permissions
         for ($i = 0; $i < count($permissions); $i++) {
@@ -121,26 +113,44 @@ class RolePermissionSeeder extends Seeder
             }
         }
 
-        // Assign super admin role permission to superadmin user
-        if ($admin) {
-            $admin->assignRole($roleSuperAdmin);
+        // Assign super admin role permission to superadmin user.
+        if ($user) {
+            $user->assignRole($roleSuperAdmin);
+        }
+
+        // Assign subscriber role permission to subscriber user.
+        if ($userSubscriber) {
+            // Add profile permissions to subscriber role.
+            $subscriberPermissions = [
+                'profile.view',
+                'profile.edit',
+                'profile.delete',
+                'profile.update',
+            ];
+
+            // Add the permissions to the subscriber role.
+            foreach ($subscriberPermissions as $permission) {
+                $roleSubscriber->givePermissionTo($permission);
+            }
+
+            $userSubscriber->assignRole('Subscriber');
         }
 
         $this->command->info('Roles and Permissions created successfully!');
     }
 
-    private function maybeCreateSuperAdminRole($admin): Role
+    private function maybeCreateSuperAdminRole(): Role
     {
-        if (is_null($admin)) {
-            $roleSuperAdmin = Role::create(['name' => 'superadmin', 'guard_name' => 'web']);
-        } else {
-            $roleSuperAdmin = Role::where('name', 'superadmin')->where('guard_name', 'web')->first();
-        }
+        return Role::firstOrCreate(
+            ['name' => 'Superadmin', 'guard_name' => 'web'],
+            ['name' => 'superadmin', 'guard_name' => 'web']
+        );
+    }
 
-        if (is_null($roleSuperAdmin)) {
-            $roleSuperAdmin = Role::create(['name' => 'superadmin', 'guard_name' => 'web']);
-        }
-
-        return $roleSuperAdmin;
+    private function maybeCreateSubscriberRole(): Role
+    {
+        return Role::firstOrCreate(
+            ['name' => 'Subscriber', 'guard_name' => 'web']
+        );
     }
 }

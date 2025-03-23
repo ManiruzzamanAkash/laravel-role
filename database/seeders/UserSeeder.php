@@ -16,17 +16,23 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        User::create(
+        User::insert([
             [
                 'name' => 'Super Admin',
                 'email' => 'superadmin@example.com',
                 'username' => 'superadmin',
                 'password' => Hash::make('12345678'),
+            ],
+            [
+                'name' => 'Subscriber',
+                'email' => 'subscriber@example.com',
+                'username' => 'subscriber',
+                'password' => Hash::make('12345678'),
             ]
-        );
+        ]);
 
         // Run factory to create additional users with unique details.
         User::factory()->count(10)->create();
-        $this->command->info('Users table seeded with 11 users!');
+        $this->command->info('Users table seeded with 12 users!');
     }
 }
