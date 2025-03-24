@@ -206,7 +206,7 @@
 
         <ul class="flex flex-col gap-4 mb-6">
             <!-- Logout Menu Item -->
-            <li>
+            <li class="menu-item-inactive">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button

@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <aside
     :class="sidebarToggle ? 'translate-x-0 lg:w-[90px]' : '-translate-x-full'"
-    class="sidebar fixed left-0 top-0 z-10 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 dark:border-gray-800 dark:bg-gray-900 lg:static lg:translate-x-0"
+    class="sidebar fixed left-0 top-0 z-10 flex h-screen w-[290px] flex-col overflow-y-hidden border-r bg-gray-800 px-5 border-gray-800 dark:bg-gray-900 lg:static lg:translate-x-0"
 >
     <!-- Sidebar Header -->
     <div
@@ -12,7 +12,7 @@
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                 <img
                     class="dark:hidden h-20"
-                    src="/images/logo/lara-admin.png"
+                    src="/images/logo/lara-admin-dark.png"
                     alt="Logo"
                 />
                 <img
