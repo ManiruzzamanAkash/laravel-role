@@ -749,5 +749,8 @@ span.flatpickr-weekday,
 
 
 @plugin 'tailwindcss-animate';
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
 @source '../views';
+@source "../../node_modules/flowbite";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

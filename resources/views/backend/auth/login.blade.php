@@ -103,7 +103,7 @@
             <img src="/images/logo/lara-admin.png" alt="Logo">
           </a>
           <p class="text-center text-gray-400 dark:text-white/60">
-            Free and Open-Source Laravel Admin Setup. <br>
+            Free and Open-Source Laravel Admin Dashboard Template
           </p>
         </div>
       </div>
