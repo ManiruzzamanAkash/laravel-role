@@ -79,5 +79,28 @@ Dashboard Page - LaraAdmin
             </div>
         </div>
     </div>
+
+    <div class="mt-6">
+        <!-- User growth chart. -->
+        @include('components.charts.user-growth-chart')
+    </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    var userGrowthData = @json($user_growth_data['data']);
+    var userGrowthLabels = @json($user_growth_data['labels']);
+</script>
+
+@vite(['resources/js/components/charts/user-growth-chart.js'])
+
+<script type="module">
+    // import userGrowthChart from "./components/charts/user-growth-chart";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // userGrowthChart();
+        console.log('User Growth Chart initialized');
+    });
+</script>
 @endsection
