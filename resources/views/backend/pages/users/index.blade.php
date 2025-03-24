@@ -72,18 +72,49 @@
                                 </td>
                                 <td class="flex px-5 py-4 sm:px-6 text-center">
                                     @if (auth()->user()->can('user.edit'))
-                                        <a href="{{ route('admin.users.edit', $admin->id) }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                                            <i class="ml-2 bi bi-pencil text-sm"></i>
+                                        <a data-tooltip-target="tooltip-edit-user-{{ $admin->id }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="{{ route('admin.users.edit', $admin->id) }}">
+                                            <i class="bi bi-pencil text-sm"></i>
                                         </a>
+                                        <div id="tooltip-edit-user-{{ $admin->id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                                            Edit User
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
                                     @endif
                                     @if (auth()->user()->can('user.delete'))
-                                        <a href="javascript:void(0);" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete?')) { document.getElementById('delete-form-{{ $admin->id }}').submit(); }" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                                            <i class="ml-2 bi bi-trash text-sm"></i>
+                                        <a data-modal-target="delete-modal-{{ $admin->id }}" data-modal-toggle="delete-modal-{{ $admin->id }}" data-tooltip-target="tooltip-delete-user-{{ $admin->id }}" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" href="javascript:void(0);">
+                                            <i class="bi bi-trash text-sm"></i>
                                         </a>
-                                        <form id="delete-form-{{ $admin->id }}" action="{{ route('admin.users.destroy', $admin->id) }}" method="POST" style="display: none;">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form>
+                                        <div id="tooltip-delete-user-{{ $admin->id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                                            Delete User
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+
+                                        <div id="delete-modal-{{ $admin->id }}" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+                                            <!-- Modal Content -->
+                                            <div class="relative p-4 w-full max-w-md bg-white rounded-lg shadow-lg dark:bg-gray-700 z-60">
+                                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete-modal-{{ $admin->id }}">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                                <div class="p-4 md:p-5 text-center">
+                                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                    </svg>
+                                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this user?</h3>
+                                                    <form id="delete-form-{{ $admin->id }}" action="{{ route('admin.users.destroy', $admin->id) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+
+                                                        <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                            Yes, Confirm
+                                                        </button>
+                                                        <button data-modal-hide="delete-modal-{{ $admin->id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
                                 </td>
                             </tr>
