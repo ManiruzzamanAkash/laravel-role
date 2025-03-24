@@ -1,7 +1,7 @@
-@extends('backend.auth.auth_master')
+@extends('backend.auth.layouts.app')
 
 @section('title')
-    Login | Admin Panel
+    Login | {{ config('app.name') }}
 @endsection
 
 @section('admin-content')

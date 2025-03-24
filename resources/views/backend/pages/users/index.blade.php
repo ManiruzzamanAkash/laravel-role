@@ -136,19 +136,3 @@
     </div>
 </div>
 @endsection
-
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        if (document.getElementById('dataTable')) {
-            new DataTable('#dataTable', {
-                responsive: true,
-                autoWidth: false, // Ensure columns adjust properly
-                columnDefs: [
-                    { targets: 'no-sort', orderable: false } // Add this if you have non-sortable columns
-                ]
-            });
-        }
-    });
-</script>
-@endsection

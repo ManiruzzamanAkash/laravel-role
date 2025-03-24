@@ -132,7 +132,3 @@
     </div>
 </div>
 @endsection
-
-@section('scripts')
-<!-- Add any additional scripts here -->
-@endsection
