@@ -72,12 +72,14 @@
                 <div>
                   <button type="submit" class="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
                     Sign In
+                    <i class="bi bi-box-arrow-in-right ml-2"></i>
                   </button>
                 </div>
                 @if (env('DEMO_MODE', true))
                 <div class="relative">
                   <button type="button" id="fill-demo-credentials" class="absolute top-0 right-0 px-3 py-1 text-xs font-medium text-white bg-gray-500 rounded shadow hover:bg-gray-600">
                     Fill with Demo
+                    <i class="bi bi-key-fill"></i>
                   </button>
                 </div>
                 @endif
@@ -100,7 +102,7 @@
 
         <div class="flex flex-col items-center max-w-xs">
           <a href="#" class="block mb-4">
-            <img src="/images/logo/lara-admin.png" alt="Logo">
+            <img src="/images/logo/lara-dashboard.png" alt="Logo">
           </a>
           <p class="text-center text-gray-400 dark:text-white/60">
             Free and Open-Source Laravel Admin Dashboard Template

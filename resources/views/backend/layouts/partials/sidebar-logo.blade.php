@@ -12,12 +12,12 @@
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                 <img
                     class="dark:hidden h-20"
-                    src="/images/logo/lara-admin-dark.png"
+                    src="/images/logo/lara-dashboard-dark.png"
                     alt="Logo"
                 />
                 <img
                     class="hidden dark:block h-20"
-                    src="/images/logo/lara-admin-dark.png"
+                    src="/images/logo/lara-dashboard-dark.png"
                     alt="Logo"
                 />
             </span>

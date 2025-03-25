@@ -33,12 +33,12 @@
             <a href="{{ route('admin.dashboard') }}" class="lg:hidden">
                 <img
                     class="dark:hidden w-32"
-                    src="/images/logo/lara-admin.png"
+                    src="/images/logo/lara-dashboard.png"
                     alt="Logo"
                 />
                 <img
                     class="hidden dark:block w-32"
-                    src="/images/logo/lara-admin-dark.png"
+                    src="/images/logo/lara-dashboard-dark.png"
                     alt="Logo"
                 />
             </a>
