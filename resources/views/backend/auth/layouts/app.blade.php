@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', 'Laravel Admin')</title>
+    <title>@yield('title', config('app.name'))</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @yield('before_vite_build')
+
     @viteReactRefresh
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @yield('styles')

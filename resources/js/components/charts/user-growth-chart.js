@@ -1,12 +1,15 @@
 import ApexCharts from "apexcharts";
 
+const userGrowthData_Data = typeof userGrowthData !== 'undefined' ? userGrowthData : [];
+const userGrowthLabels_Labels = typeof userGrowthLabels !== 'undefined' ? userGrowthLabels : [];
+
 // ===== User Growth Chart.
 const userGrowthChart = () => {
   const chartOneOptions = {
     series: [
       {
         name: "User Registered",
-        data: userGrowthData, // Dynamically set data
+        data: userGrowthData_Data,
       },
     ],
     colors: ["#465fff"],
@@ -35,7 +38,7 @@ const userGrowthChart = () => {
       colors: ["transparent"],
     },
     xaxis: {
-      categories: userGrowthLabels, // Dynamically set labels
+      categories: userGrowthLabels_Labels, // Dynamically set labels
       axisBorder: {
         show: false,
       },
@@ -89,7 +92,5 @@ const userGrowthChart = () => {
     chartFour.render();
   }
 };
-
-userGrowthChart();
 
 export default userGrowthChart;

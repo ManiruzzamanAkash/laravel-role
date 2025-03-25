@@ -4,6 +4,13 @@
 Dashboard Page - LaraAdmin
 @endsection
 
+@section('before_vite_build')
+<script>
+    var userGrowthData = @json($user_growth_data['data']);
+    var userGrowthLabels = @json($user_growth_data['labels']);
+</script>
+@endsection
+
 @section('admin-content')
 <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
     <div class="grid grid-cols-12 gap-4 md:gap-6">
@@ -85,22 +92,4 @@ Dashboard Page - LaraAdmin
         @include('components.charts.user-growth-chart')
     </div>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-    var userGrowthData = @json($user_growth_data['data']);
-    var userGrowthLabels = @json($user_growth_data['labels']);
-</script>
-
-@vite(['resources/js/components/charts/user-growth-chart.js'])
-
-<script type="module">
-    // import userGrowthChart from "./components/charts/user-growth-chart";
-
-    document.addEventListener("DOMContentLoaded", () => {
-        // userGrowthChart();
-        console.log('User Growth Chart initialized');
-    });
-</script>
 @endsection
