@@ -33,8 +33,6 @@ class LoginController extends Controller
 
     /**
      * show login form for admin guard
-     *
-     * @return Renderable
      */
     public function showLoginForm(): Renderable
     {
@@ -44,11 +42,9 @@ class LoginController extends Controller
         return view('backend.auth.login')->with(compact('email', 'password'));
     }
 
-
     /**
      * Login admin.
      *
-     * @param Request $request
      * @return void
      */
     public function login(Request $request)
@@ -60,18 +56,21 @@ class LoginController extends Controller
         ]);
 
         // Attempt to login
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Redirect to dashboard
             session()->flash('success', 'Successfully Logged in!');
+
             return redirect()->route('admin.dashboard');
         } else {
             // Search using username
-            if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
+            if (Auth::guard('web')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
                 session()->flash('success', 'Successfully Logged in!');
+
                 return redirect()->route('admin.dashboard');
             }
             // error
             session()->flash('error', 'Invalid email or password');
+
             return back();
         }
     }
@@ -83,7 +82,8 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('web')->logout();
+
         return redirect()->route('admin.login');
     }
 }

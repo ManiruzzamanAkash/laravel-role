@@ -1,10 +1,10 @@
-# Laravel Role Permission Management System - Laravel `12.x`
+<img src="https://demo.laradashboard.com/images/logo/lara-dashboard.png" style="width: 100%;"/>
 
-A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel.
+**Lara Dashboard** - A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel with Tailwind CSS integrated with all starting features including dark/lite mode, charts, tables, forms and so on...
 
-**Demo:** http://localhost:8000
+**Demo:** https://demo.laradashboard.com/
 ```
-Username - superadmin
+Email - superadmin@example.com
 password - 12345678
 ```
 
@@ -12,6 +12,7 @@ password - 12345678
 - Laravel `7.x` | `9.7` | `11.x` | `12.x`
 - Spatie role permission package  `^6.4`
 - PHPUnit test package `^11.x`
+- Tailwind CSS >= 4.x
 
 ## Versions:
 - Laravel `7.x` & PHP -`7.x`
@@ -26,6 +27,9 @@ password - 12345678
 
 - Laravel `12.x` & PHP >= `8.3`
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x
+
+- Laravel `12.x` & Tail Admin Template Integration
+    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x-tailadmin
 
 ## Project Setup
 Git clone -
@@ -60,6 +64,7 @@ php artisan migrate:fresh --seed
 Run Project -
 ```php
 php artisan serve
+npm run dev
 ```
 
 Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/ManiruzzamanAkash/laravel-role/blob/master/database/sql/laravel_role.sql
@@ -68,14 +73,15 @@ So, You've got the project of Laravel Role & Permission Management on your http:
 
 ## How it works
 1. Login using Super Admin Credential -
-    1. Username - `superadmin`
+    1. Email - `superadmin@example.com`
     1. Password - `12345678`
-2. Create Admin
+2. Create User
 3. Create Role
 4. Assign Permission to Roles
-5. Assign Multiple Role to an admin
+5. Assign Multiple Role to an User
 6. Check by login with the new credentials.
 7. If you've not enough permission to do any task, you'll get a warning message.
+8. Dashboard with Beautiful chart integrated
 
 ## Learn More & Discussion
 https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
@@ -83,8 +89,14 @@ https://devsenv.com/tutorials/laravel-role-permission-management-system-full-exa
 
 
 ### Login & Dashboard Page
-![alt text][adminLoginImage]
+**Login Page**
+![alt text][userLoginImage]
+
+**Dashboard Page Lite Mode**
 ![alt text][dashboardImage]
+
+**Dashboard Page Dark Mode**
+![alt text][dashboardDarkMode]
 
 ### Role Pages
 Role List
@@ -94,28 +106,28 @@ Role Create
 Role Edit
 ![alt text][roleEditImage]
 
-### Admin Pages
-Admin List
-![alt text][adminListImage]
-Admin Create
-![alt text][adminCreateImage]
+### Users Pages
+Users List
+![alt text][userListImage]
+User Create
+![alt text][userCreateImage]
 
 ### Other Pages
 Custom Error Pages
 ![alt text][errorPageImage]
-Dynamic Sidebar Manage
-![alt text][sidebarDyanamic]
 
 
 
-[dashboardImage]: https://i.ibb.co/WyxWFp7/1-Laravel-Role-Dashboard.png "Dashboard Page Laravel Role Management"
-[roleListImage]: https://i.ibb.co/80jM3Q7/2-Laravel-Manage-Roles.png "2-Laravel-Manage-Roles"
-[roleCreateImage]: https://i.ibb.co/kgM1ShW/3-Laravel-Role-Create.png "3-Laravel-Role-Create"
-[roleEditImage]: https://i.ibb.co/b6jNPFr/4-Laravel-Role-Edit.png "4-Laravel-Role-Edit"
-[adminListImage]: https://i.ibb.co/xY2N6Qd/5-Laravel-Admin-Manage.png "5-Laravel-Admin-Manage"
-[adminCreateImage]: https://i.ibb.co/Drcn6Xn/6-Laravel-Admin-Create.png "6-Laravel-Admin-Create"
-[adminLoginImage]: https://i.ibb.co/4g4vs4g/7-Login-Page.png "7-Login-Page"
-[errorPageImage]: https://i.ibb.co/HYcvRH4/8-Error-Page-Handle.png "8 - Error Page Handling"
+
+[dashboardImage]: https://i.ibb.co.com/Kp7VD7kD/dashboard.png "Dashboard Page Laravel Role Management"
+[dashboardDarkMode]: https://i.ibb.co.com/KxGHDWM9/Screenshot-2025-03-26-at-11-12-32-AM.png "Dashboard Page Dark Mode"
+[roleListImage]: https://i.ibb.co.com/ZpBtjZf6/role.png "2-Laravel-Manage-Roles"
+[roleCreateImage]: https://i.ibb.co.com/NdwcDdfB/role-create.png "3-Laravel-Role-Create"
+[roleEditImage]: https://i.ibb.co.com/vxr970jJ/role-edit.png "4-Laravel-Role-Edit"
+[userListImage]:  https://i.ibb.co.com/ymXN6BHc/users.png "5-Laravel-Users-Manage" 
+[userCreateImage]: https://i.ibb.co.com/TMMr1HbR/user-create.png "6-Laravel-User-Create"
+[userLoginImage]: https://i.ibb.co.com/HDXh1G6W/login.png "7-Login-Page"
+[errorPageImage]: https://i.ibb.co.com/Lhz7XH7C/403.png "8 - Error Page Handling"
 [sidebarDyanamic]: https://i.ibb.co/Jpq6X8x/9-Sidebar-Manage-Dynamically.png "9-Sidebar-Manage-Dynamically"
 
 ## Wanna talk with me
@@ -125,8 +137,9 @@ Please mail me at - manirujjamanakash@gmail.com
 ## Support
 If you like my work you may consider buying me a ☕ / 🍕
 
-<a href="https://www.patreon.com/maniruzzaman" target="_blank" title="Buy Me A Coffee"> <img src="https://camo.githubusercontent.com/45ce6667a35b63fd6a1ba6978d030a7f52ff5b1b262c5c8aa3ece29afc469ac8/68747470733a2f2f63646e2e6275796d6561636f666665652e636f6d2f627574746f6e732f76322f64656661756c742d7265642e706e67" alt="ManiruzzamanAkash" width="200" />
- </a>
+<a href="https://www.patreon.com/maniruzzaman" target="_blank" title="Buy Me A Coffee">
+    Go to Patreon
+</a>
 
 ## Contribution
 Contribution is open. Create Pull-request and I'll add it to the project if it's good enough.

@@ -1,104 +1,85 @@
-
-@extends('backend.layouts.master')
+@extends('backend.layouts.app')
 
 @section('title')
-User Edit - Admin Panel
+User Edit - {{ config('app.name') }}
 @endsection
-
-@section('styles')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-<style>
-    .form-check-label {
-        text-transform: capitalize;
-    }
-</style>
-@endsection
-
 
 @section('admin-content')
 
-<!-- page title area start -->
-<div class="page-title-area">
-    <div class="row align-items-center">
-        <div class="col-sm-6">
-            <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">User Create</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
-                    <li><span>Edit User - {{ $user->name }}</span></li>
-                </ul>
-            </div>
+<div class="p-4 mx-auto max-w-7xl md:p-6">
+    <div x-data="{ pageName: '{{ __('Edit User') }}' }">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white" x-text="pageName">Edit User</h2>
+            <nav>
+                <ol class="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                    <li>
+                        <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-1.5">
+                            Home
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.users.index') }}" class="inline-flex items-center gap-1.5">
+                            Users
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li class="text-gray-800 dark:text-white" x-text="pageName">Edit User</li>
+                </ol>
+            </nav>
         </div>
-        <div class="col-sm-6 clearfix">
-            @include('backend.layouts.partials.logout')
+    </div>
+
+    <div class="space-y-6">
+        <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+            <div class="px-5 py-2.5 sm:px-6 sm:py-5">
+                <h3 class="text-base font-medium text-gray-800 dark:text-white">Edit User - {{ $user->name }}</h3>
+            </div>
+            <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
+                @include('backend.layouts.partials.messages')
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="space-y-6">
+                    @method('PUT')
+                    @csrf
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Full Name</label>
+                            <input type="text" name="name" id="name" required value="{{ $user->name }}" placeholder="Enter Full Name" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-400">User Email</label>
+                            <input type="email" name="email" id="email" required value="{{ $user->email }}" placeholder="Enter Email" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Password (Optional)</label>
+                            <input type="password" name="password" id="password" placeholder="Enter Password" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                        </div>
+                        <div>
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Confirm Password (Optional)</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                        </div>
+                        <div>
+                            <label for="roles" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Assign Roles</label>
+                            <div class="space-y-2">
+                                @foreach ($roles as $role)
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="roles[]" id="role_{{ $role->id }}" value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'checked' : '' }} class="h-4 w-4 text-brand-500 border-gray-300 rounded focus:ring-brand-400 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-brand-500">
+                                        <label for="role_{{ $role->id }}" class="ml-2 text-sm text-gray-700 dark:text-gray-400">{{ $role->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Username</label>
+                            <input type="text" name="username" id="username" required value="{{ $user->username }}" placeholder="Enter Username" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-start gap-4">
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600">Save</button>
+                        <a href="{{ route('admin.users.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-white">Cancel</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<!-- page title area end -->
-
-<div class="main-content-inner">
-    <div class="row">
-        <!-- data table start -->
-        <div class="col-12 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Edit User - {{ $user->name }}</h4>
-                    @include('backend.layouts.partials.messages')
-                    
-                    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
-                        @method('PUT')
-                        @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">User Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="{{ $user->name }}">
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">User Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{ $user->email }}">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter Password">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="password">Assign Roles</label>
-                                <select name="roles[]" id="roles" class="form-control select2" multiple>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save User</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- data table end -->
-        
-    </div>
-</div>
-@endsection
-
-@section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.select2').select2();
-    })
-</script>
 @endsection
