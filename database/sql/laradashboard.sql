@@ -3,7 +3,7 @@
 --
 -- https://tableplus.com/
 --
--- Database: laravel_role
+-- Database: laradashboard
 -- Generation Time: 2025-03-26 11:10:12.8910
 -- -------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 <img src="https://demo.laradashboard.com/images/logo/lara-dashboard.png" style="width: 100%;"/>
 
-**Lara Dashboard** - A project which manage Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel with Tailwind CSS integrated with all starting features including dark/lite mode, charts, tables, forms and so on...
+**Lara Dashboard** - A project which manages Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel with Tailwind CSS integrated with all starting features including dark/lite mode, charts, tables, forms and so on...
 
 **Demo:** https://demo.laradashboard.com/
 ```
@@ -30,16 +30,16 @@ password - 12345678
 
 - Laravel `12.x` & Tail Admin Template Integration
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x-tailadmin
-
+ 
 ## Project Setup
 Git clone -
 ```console
-git clone https://github.com/ManiruzzamanAkash/laravel-role.git
+git clone git@github.com:laradashboard/laradashboard.git
 ```
 
 Go to project folder -
 ```console
-cd laravel-role
+cd laradashboard
 ```
 
 Install Composer & Node Dependencies -
@@ -48,7 +48,7 @@ composer install
 npm install
 ```
 
-Create database called - `laravel_role`
+Create database called - `laradashboard`
 
 Create `.env` file by copying `.env.example` file
 
@@ -68,9 +68,15 @@ php artisan serve
 npm run dev
 ```
 
-Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/ManiruzzamanAkash/laravel-role/blob/master/database/sql/laravel_role.sql
+Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/laradashboard/laradashboard/blob/master/database/sql/laradashboard.sql
 
 So, You've got the project of Laravel Role & Permission Management on your http://localhost:8000
+
+## Previously From laravel-role
+We were previously at https://github.com/ManiruzzamanAkash/laravel-role, so you need to change the URL if you moved from there
+```console
+git remote set-url origin git@github.com:laradashboard/laradashboard.git
+```
 
 ## How it works
 1. Login using Super Admin Credential -
@@ -86,8 +92,6 @@ So, You've got the project of Laravel Role & Permission Management on your http:
 
 ## Learn More & Discussion
 https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
-
-
 
 ### Login & Dashboard Page
 **Login Page**
@@ -118,8 +122,6 @@ Custom Error Pages
 ![alt text][errorPageImage]
 
 
-
-
 [dashboardImage]: https://i.ibb.co.com/Kp7VD7kD/dashboard.png "Dashboard Page Laravel Role Management"
 [dashboardDarkMode]: https://i.ibb.co.com/KxGHDWM9/Screenshot-2025-03-26-at-11-12-32-AM.png "Dashboard Page Dark Mode"
 [roleListImage]: https://i.ibb.co.com/ZpBtjZf6/role.png "2-Laravel-Manage-Roles"
@@ -134,6 +136,11 @@ Custom Error Pages
 ## Wanna talk with me
 Please mail me at - manirujjamanakash@gmail.com
 
+## Premium Features
+Please visit at Lara Dashboard to get more premium moduels - https://laradashboard.com. Premium modules included CRM, HRM, Course Managements and so on.
+
+## Live Demo
+https://demo.laradashboard.com
 
 ## Support
 If you like my work you may consider buying me a ☕ / 🍕
