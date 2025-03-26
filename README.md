@@ -42,9 +42,10 @@ Go to project folder -
 cd laravel-role
 ```
 
-Install Laravel Dependencies -
+Install Composer & Node Dependencies -
 ```console
 composer install
+npm install
 ```
 
 Create database called - `laravel_role`
