@@ -12,6 +12,8 @@
     @viteReactRefresh
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @yield('styles')
+
+    @php ld_apply_filters('admin_head', ''); @endphp
 </head>
 
 <body

@@ -37,7 +37,7 @@ User Edit - {{ config('app.name') }}
             </div>
             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                 @include('backend.layouts.partials.messages')
-                <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="space-y-6">
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="space-y-6" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
