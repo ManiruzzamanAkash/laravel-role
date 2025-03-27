@@ -13,6 +13,8 @@ password - 12345678
 - Spatie role permission package  `^6.4`
 - PHPUnit test package `^11.x`
 - Tailwind CSS >= 4.x
+- Laravel Modules - https://laravelmodules.com/docs/12/getting-started/introduction
+- Laravel Events (A WordPress like action/filter hooks) - https://github.com/tormjens/eventy
 
 ## Versions:
 - Laravel `7.x` & PHP -`7.x`
@@ -105,18 +107,25 @@ https://devsenv.com/tutorials/laravel-role-permission-management-system-full-exa
 ![alt text][dashboardDarkMode]
 
 ### Role Pages
-Role List
+**Role List**
 ![alt text][roleListImage]
-Role Create
+**Role Create**
 ![alt text][roleCreateImage]
-Role Edit
+**Role Edit**
 ![alt text][roleEditImage]
 
 ### Users Pages
-Users List
+**Users List**
 ![alt text][userListImage]
-User Create
+**User Create**
 ![alt text][userCreateImage]
+
+### Modules Page
+**Module List**
+![alt text][moduleListPage]
+
+**Upload Module**
+![alt text][moduleCreatePage]
 
 ### Other Pages
 Custom Error Pages
@@ -133,6 +142,8 @@ Custom Error Pages
 [userLoginImage]: https://i.ibb.co.com/HDXh1G6W/login.png "7-Login-Page"
 [errorPageImage]: https://i.ibb.co.com/Lhz7XH7C/403.png "8 - Error Page Handling"
 [sidebarDyanamic]: https://i.ibb.co/Jpq6X8x/9-Sidebar-Manage-Dynamically.png "9-Sidebar-Manage-Dynamically"
+[moduleListPage]: https://i.ibb.co.com/k62YKzC5/Module-List-Page.png
+[moduleCreatePage]: https://i.ibb.co.com/xqMZ37Cy/Module-Upload-Page.png
 
 ## Wanna talk with me
 Please mail me at - manirujjamanakash@gmail.com
