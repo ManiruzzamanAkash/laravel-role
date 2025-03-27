@@ -80,7 +80,7 @@
     @else
         @foreach ($modules as $category => $categoryModules)
             <div class="mb-6">
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-3">{{ $category ?? 'Uncategorized' }}</h3>
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-3">{{ ucFirst($category ?? 'Uncategorized ') }} Modules</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($categoryModules as $module)
                         <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
