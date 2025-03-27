@@ -13,6 +13,7 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10",
         "laravel/ui": "^4.5",
+        "nwidart/laravel-modules": "^12.0",
         "spatie/laravel-permission": "^6.4",
         "tormjens/eventy": "^0.8.0"
     },
@@ -28,11 +29,19 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "wikimedia/composer-merge-plugin": true
+        }
     },
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ]
         }
     },
     "autoload": {
