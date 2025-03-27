@@ -52,9 +52,10 @@ Create database called - `laradashboard`
 
 Create `.env` file by copying `.env.example` file
 
-Generate Artisan Key (If needed) -
+Generate Artisan Key or necessary linkings
 ```console
 php artisan key:generate
+php artisan storage:link
 ```
 
 Migrate Database with seeder -

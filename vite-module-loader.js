@@ -1,6 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { pathToFileURL } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
+
+// Derive __dirname from import.meta.url
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function collectModuleAssetsPaths(paths, modulesPath) {
   modulesPath = path.join(__dirname, modulesPath);
@@ -16,7 +20,7 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
     const moduleDirectories = await fs.readdir(modulesPath);
 
     for (const moduleDir of moduleDirectories) {
-      if (moduleDir === '.DS_Store') {
+      if (moduleDir === '.DS_Store' || moduleDir === '__MACOSX') {
         // Skip .DS_Store directory
         continue;
       }
@@ -33,11 +37,13 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
           // Import the module-specific Vite configuration
           const moduleConfig = await import(moduleConfigURL.href);
 
-          if (moduleConfig.paths && Array.isArray(moduleConfig.paths)) {
-            paths.push(...moduleConfig.paths);
+          if (moduleConfig.default && moduleConfig.default.paths && Array.isArray(moduleConfig.default.paths)) {
+            paths.push(...moduleConfig.default.paths);
+          } else {
+            console.error(`Error: module ${moduleDir} does not have a paths array in vite.config.js`);
           }
         } catch (error) {
-          // vite.config.js does not exist, skip this module
+          console.error(`Error importing vite.config.js for module ${moduleDir}: ${error}`);
         }
       }
     }
