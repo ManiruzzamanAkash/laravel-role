@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/build
+/public/build-*
 /storage/*.key
 /vendor
 .env
@@ -16,3 +17,6 @@ yarn-error.log
 .DS_Store
 public/.DS_Store
 public/images/.DS_Store
+
+# Exclude anything from /Modules folder.
+/Modules/*

@@ -9,11 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10",
-        "guzzlehttp/guzzle": "^7.2",
         "laravel/ui": "^4.5",
-        "spatie/laravel-permission": "^6.4"
+        "nwidart/laravel-modules": "^12.0",
+        "spatie/laravel-permission": "^6.4",
+        "tormjens/eventy": "^0.8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
@@ -27,11 +29,19 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "wikimedia/composer-merge-plugin": true
+        }
     },
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ]
         }
     },
     "autoload": {
@@ -43,6 +53,9 @@
         "classmap": [
             "database/seeders",
             "database/factories"
+        ],
+        "files": [
+            "app/Helper/hooks.php"
         ]
     },
     "autoload-dev": {

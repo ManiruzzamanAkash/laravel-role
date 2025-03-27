@@ -1,0 +1,5 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+enum $CLASS$ {}

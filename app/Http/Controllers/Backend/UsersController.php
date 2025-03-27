@@ -52,13 +52,18 @@ class UsersController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+
+        $user = ld_apply_filters('user_store_before_save', $user, $request);
         $user->save();
+        $user = ld_apply_filters('user_store_after_save', $user, $request);
 
         if ($request->roles) {
             $user->assignRole($request->roles);
         }
 
         session()->flash('success', __('User has been created.'));
+
+        ld_do_action('user_store_after', $user);
 
         return redirect()->route('admin.users.index');
     }
@@ -90,7 +95,10 @@ class UsersController extends Controller
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
+        $user = ld_apply_filters('user_update_before_save', $user, $request);
         $user->save();
+        $user = ld_apply_filters('user_update_after_save', $user, $request);
+        ld_do_action('user_update_after', $user);
 
         $user->roles()->detach();
         if ($request->roles) {
@@ -107,8 +115,12 @@ class UsersController extends Controller
         $this->checkAuthorization(auth()->user(), ['user.delete']);
 
         $user = User::findOrFail($id);
+        $user = ld_apply_filters('user_delete_before', $user);
         $user->delete();
+        $user = ld_apply_filters('user_delete_after', $user);
         session()->flash('success', 'User has been deleted.');
+
+        ld_do_action('user_delete_after', $user);
 
         return back();
     }
@@ -129,11 +141,15 @@ class UsersController extends Controller
             'password' => 'nullable|min:8|confirmed',
         ]);
 
-        $user->update([
+        $requestInputs = ld_apply_filters('user_profile_update_data_before', [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? bcrypt($request->password) : $user->password,
-        ]);
+        ], $user);
+
+        $user->update($requestInputs);
+
+        ld_do_action('user_profile_update_after', $user);
 
         session()->flash('success', 'Profile updated successfully.');
 

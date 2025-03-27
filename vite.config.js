@@ -2,11 +2,24 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite'
+import collectModuleAssetsPaths from "./vite-module-loader";
+
+let paths = [
+    'resources/css/app.css',
+    'resources/js/app.js',
+];
+
+// Precompute all paths synchronously.
+let allPaths = [];
+(async () => {
+    allPaths = await collectModuleAssetsPaths(paths, 'Modules');
+})();
+
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: allPaths,
             refresh: true,
         }),
         react(),
@@ -14,5 +27,6 @@ export default defineConfig({
     ],
     esbuild: {
         jsx: 'automatic',
+        drop: ['console', 'debugger'],
     },
 });

@@ -5,7 +5,7 @@ use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\RolesController;
-// use App\Http\Controllers\Backend\UsersController;
+use App\Http\Controllers\Backend\ModulesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +47,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // Forget Password Routes.
     Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/password/reset/submit', [ForgotPasswordController::class, 'reset'])->name('password.update');
+
+    // Modules Routes.
+    Route::get('/modules', [ModulesController::class, 'index'])->name('modules.index');
+    Route::post('/modules/{module}/toggle-status', [ModulesController::class, 'toggleStatus'])->name('modules.toggle-status');
+    Route::post('/modules/upload', [ModulesController::class, 'upload'])->name('modules.upload');
+    Route::delete('/admin/modules/{module}', [ModulesController::class, 'destroy'])->name('modules.delete');
 })->middleware('auth');
 
 /**

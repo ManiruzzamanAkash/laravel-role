@@ -166,6 +166,8 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        TorMorten\Eventy\EventServiceProvider::class,
+        TorMorten\Eventy\EventBladeServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,6 +230,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /**
+         * Package Aliases
+         */
+        'Eventy' => TorMorten\Eventy\Facades\Events::class,
     ],
 
 ];
