@@ -9,23 +9,19 @@
 <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
     @include('backend.layouts.partials.messages')
 
-    <div x-data="{ pageName: 'Modules' }">
+    <div x-data="{ pageName: 'Modules', showUploadArea: false }">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90">
                 Modules
 
                 @if(count($modules) > 0)
                     <button
-                        @click="$refs.uploadModule.click()"
+                        @click="showUploadArea = !showUploadArea"
                         class="ml-4 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
                     >
                         <i class="bi bi-cloud-upload mr-2"></i>
                         Upload Module
                     </button>
-                    <form action="{{ route('admin.modules.upload') }}" method="POST" enctype="multipart/form-data" class="hidden">
-                        @csrf
-                        <input type="file" name="module" accept=".zip" x-ref="uploadModule" @change="$event.target.form.submit()">
-                    </form>
                 @endif
             </h2>
             <nav>
@@ -40,20 +36,41 @@
                 </ol>
             </nav>
         </div>
+
+        <div x-show="showUploadArea" class="mb-6 p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-600"
+             @dragover.prevent
+             @drop.prevent="$refs.uploadModule.files = $event.dataTransfer.files; $refs.uploadModule.dispatchEvent(new Event('change'))">
+            <p class="text-center text-gray-600 dark:text-gray-400">
+                Drag and drop your module file here, or
+                <button
+                    @click="$refs.uploadModule.click()"
+                    class="text-blue-500 underline hover:text-blue-600"
+                >
+                    browse
+                </button>
+                to select a file.
+            </p>
+            <form action="{{ route('admin.modules.upload') }}" method="POST" enctype="multipart/form-data" class="hidden">
+                @csrf
+                <input type="file" name="module" accept=".zip" x-ref="uploadModule" @change="$event.target.form.submit()">
+            </form>
+        </div>
     </div>
 
     @if ($modules->isEmpty())
-        <div class="flex flex-col items-center justify-center h-64 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <div class="flex flex-col items-center justify-center h-64 bg-gray-100 dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300"
+             @dragover.prevent
+             @drop.prevent="$refs.uploadModule.files = $event.dataTransfer.files; $refs.uploadModule.dispatchEvent(new Event('change'))">
             <svg class="w-16 h-16 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            <p class="mt-4 text-gray-600 dark:text-gray-400">No modules have been added yet.</p>
+            <p class="mt-4 text-gray-600 dark:text-gray-400">Drag and drop your module file here, or</p>
             <button
                 @click="$refs.uploadModule.click()"
                 class="mt-4 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
             >
                 <i class="bi bi-cloud-upload mr-2"></i>
-                Upload Module
+                Upload
             </button>
             <form action="{{ route('admin.modules.upload') }}" method="POST" enctype="multipart/form-data" class="hidden">
                 @csrf
