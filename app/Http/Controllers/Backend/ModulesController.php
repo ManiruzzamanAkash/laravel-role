@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Storage;
 use Nwidart\Modules\Facades\Module as ModuleFacade;
 
 class ModulesController extends Controller
@@ -14,6 +13,7 @@ class ModulesController extends Controller
     public function index()
     {
         $modules = Module::orderBy('priority', 'asc')
+            ->orderBy('priority', 'asc')
             ->get()
             ->groupBy('category');
 
@@ -58,7 +58,7 @@ class ModulesController extends Controller
         $file = $request->file('module');
         $filePath = $file->storeAs('modules', $file->getClientOriginalName());
 
-        // Extract and install the module
+        // Extract and install the module.
         $modulePath = storage_path('app/' . $filePath);
         $extractPath = base_path('Modules');
         $zip = new \ZipArchive();
@@ -70,16 +70,19 @@ class ModulesController extends Controller
             // Remove / from moduleName.
             $moduleName = str_replace('/', '', $moduleName);
 
-            // Register the module in the database
+            // Register the module in the database.
             $module = ModuleFacade::find(strtolower($moduleName));
             if ($module) {
-                \Log::info(json_encode($module));
-                Module::createOrFirst([
-                    'name' => $module->getStudlyName(),
+                // If already exist by slug, update the module.
+                Module::updateOrCreate(['slug' => $module->getLowerName()], [
                     'description' => $module->getDescription(),
                     'category' => $module->get('category') ?? 'Uncategorized',
                     'priority' => $module->getPriority(),
                     'version' => $module->get('version') ?? '1.0.0',
+                    'icon' => $module->get('icon') ?? 'bi-box',
+                    'tags' => $module->get('keywords') ?? $module->get('tags') ?? [],
+                    'slug' => $module->getLowerName(),
+                    'name' => $module->getStudlyName(),
                     'status' => true,
                 ]);
 

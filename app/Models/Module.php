@@ -11,10 +11,18 @@ class Module extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'status',
         'category',
         'tags',
         'priority',
+        'icon',
+        'version',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
+        'tags' => 'array',
     ];
 }

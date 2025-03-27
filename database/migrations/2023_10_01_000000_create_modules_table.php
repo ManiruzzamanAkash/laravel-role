@@ -16,11 +16,14 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);
             $table->string('category')->nullable();
-            $table->string('tags')->nullable();
+            $table->text('tags')->nullable();
             $table->integer('priority')->default(0);
+            $table->string('icon')->nullable();
+            $table->string('version')->nullable();
             $table->timestamps();
         });
     }
