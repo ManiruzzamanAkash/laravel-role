@@ -82,6 +82,12 @@ class RolePermissionSeeder extends Seeder
                     'profile.update',
                 ],
             ],
+            [
+                'group_name' => 'monitoring',
+                'permissions' => [
+                    'pulse.view',
+                ],
+            ],
         ];
 
         // Create and Assign Permissions

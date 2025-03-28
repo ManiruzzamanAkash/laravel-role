@@ -6,9 +6,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\Charts\UserChartService;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use App\Services\Charts\UserChartService;
 
 class DashboardController extends Controller
 {

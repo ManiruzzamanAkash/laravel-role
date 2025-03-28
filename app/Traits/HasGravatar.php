@@ -6,9 +6,6 @@ trait HasGravatar
 {
     /**
      * Get the Gravatar URL for the model's email.
-     *
-     * @param int $size
-     * @return string
      */
     public function getGravatarUrl(int $size = 80): string
     {

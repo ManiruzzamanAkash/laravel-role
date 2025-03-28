@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'email' => 'subscriber@example.com',
                 'username' => 'subscriber',
                 'password' => Hash::make('12345678'),
-            ]
+            ],
         ]);
 
         // Run factory to create additional users with unique details.

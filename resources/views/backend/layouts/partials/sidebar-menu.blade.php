@@ -108,6 +108,36 @@
                 </a>
             </li>
             @endif
+
+            @if ($user->can('pulse.view'))
+            <li>
+                <button
+                    class="menu-item group w-full text-left menu-item-inactive text-white"
+                    type="button"
+                    onclick="toggleSubmenu('monitoring-submenu')"
+                >
+                    <i class="bi bi-activity text-xl text-center"></i>
+                    <span class="menu-item-text">Monitoring</span>
+                    <i class="bi bi-chevron-down ml-auto"></i>
+                </button>
+                <ul
+                    id="monitoring-submenu"
+                    class="submenu hidden pl-8 mt-2 space-y-2"
+                >
+                    @if ($user->can('pulse.view'))
+                    <li>
+                        <a
+                            href="{{ route('pulse') }}"
+                            class="block px-4 py-2 rounded-lg menu-item-inactive"
+                            target="_blank"
+                        >
+                            Laravel Pulse
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
         </ul>
     </div>
 

@@ -9,11 +9,9 @@ use TorMorten\Eventy\Facades\Events as Eventy;
  *
  * @see https://github.com/tormjens/eventy
  *
- * @param string $hookName
- * @param mixed $callback
- * @param mixed $priority
- * @param mixed $args
- *
+ * @param  mixed  $callback
+ * @param  mixed  $priority
+ * @param  mixed  $args
  * @return void
  */
 function ld_add_action(string $hookName, $callback, $priority = 20, $args = 1)
@@ -28,9 +26,7 @@ function ld_add_action(string $hookName, $callback, $priority = 20, $args = 1)
  *
  * @see https://github.com/tormjens/eventy
  *
- * @param string $hookName
- * @param mixed $args
- *
+ * @param  mixed  $args
  * @return void
  */
 function ld_do_action(string $hookName, $args = null)
@@ -45,10 +41,8 @@ function ld_do_action(string $hookName, $args = null)
  *
  * @see https://github.com/tormjens/eventy
  *
- * @param string $hookName
- * @param mixed $value
- * @param mixed $args
- *
+ * @param  mixed  $value
+ * @param  mixed  $args
  * @return mixed
  */
 function ld_apply_filters(string $hookName, $value, $args = null)
@@ -63,11 +57,9 @@ function ld_apply_filters(string $hookName, $value, $args = null)
  *
  * @see https://github.com/tormjens/eventy
  *
- * @param string $hookName
- * @param mixed $callback
- * @param mixed $priority
- * @param mixed $args
- *
+ * @param  mixed  $callback
+ * @param  mixed  $priority
+ * @param  mixed  $args
  * @return mixed
  */
 function ld_add_filter(string $hookName, $callback, $priority = 20, $args = 1)
