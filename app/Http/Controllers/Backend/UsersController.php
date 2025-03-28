@@ -38,6 +38,8 @@ class UsersController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['user.create']);
 
+        ld_do_action('user_create_page_before');
+
         return view('backend.pages.users.create', [
             'roles' => Role::all(),
         ]);
@@ -72,7 +74,11 @@ class UsersController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['user.edit']);
 
+        ld_do_action('user_edit_page_before');
+
         $user = User::findOrFail($id);
+
+        $user = ld_apply_filters('user_edit_page_before_with_user', $user);
 
         return view('backend.pages.users.edit', [
             'user' => $user,
