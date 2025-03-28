@@ -21,7 +21,7 @@ class RolesController extends Controller
         $query = Role::query();
 
         if (request()->has('search') && request()->input('search') !== '') {
-            $query->where('name', 'like', '%' . request()->input('search') . '%');
+            $query->where('name', 'like', '%'.request()->input('search').'%');
         }
 
         return view('backend.pages.roles.index', [
