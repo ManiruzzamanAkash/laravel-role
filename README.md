@@ -92,6 +92,8 @@ git remote set-url origin git@github.com:laradashboard/laradashboard.git
 6. Check by login with the new credentials.
 7. If you've not enough permission to do any task, you'll get a warning message.
 8. Dashboard with Beautiful chart integrated
+9. Module Based Development - Custom Module Add/Enable/Disable/Delete
+10. Monitoring - Laravel Pulse
 
 ## Learn More & Discussion
 https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
@@ -127,6 +129,10 @@ https://devsenv.com/tutorials/laravel-role-permission-management-system-full-exa
 **Upload Module**
 ![alt text][moduleCreatePage]
 
+### Monitoring Pages
+**Laravel Pulse**
+![alt text][laravelPulsePage]
+
 ### Other Pages
 Custom Error Pages
 ![alt text][errorPageImage]
@@ -144,6 +150,7 @@ Custom Error Pages
 [sidebarDyanamic]: https://i.ibb.co/Jpq6X8x/9-Sidebar-Manage-Dynamically.png "9-Sidebar-Manage-Dynamically"
 [moduleListPage]: https://i.ibb.co.com/k62YKzC5/Module-List-Page.png
 [moduleCreatePage]: https://i.ibb.co.com/xqMZ37Cy/Module-Upload-Page.png
+[laravelPulsePage]: /demo-screenshots/Laravel%20Pulse%20Dashboard%20for%20Monitoring.png
 
 ## Wanna talk with me
 Please mail me at - manirujjamanakash@gmail.com
