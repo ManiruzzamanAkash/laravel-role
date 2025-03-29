@@ -9,10 +9,10 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -38,6 +38,8 @@ class UsersController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['user.create']);
 
+        ld_do_action('user_create_page_before');
+
         return view('backend.pages.users.create', [
             'roles' => Role::all(),
         ]);
@@ -47,7 +49,7 @@ class UsersController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['user.create']);
 
-        $user = new User();
+        $user = new User;
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
@@ -72,7 +74,11 @@ class UsersController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['user.edit']);
 
+        ld_do_action('user_edit_page_before');
+
         $user = User::findOrFail($id);
+
+        $user = ld_apply_filters('user_edit_page_before_with_user', $user);
 
         return view('backend.pages.users.edit', [
             'user' => $user,
@@ -128,6 +134,7 @@ class UsersController extends Controller
     public function editProfile()
     {
         $user = Auth::user();
+
         return view('backend.pages.profile.edit', compact('user'));
     }
 
@@ -137,7 +144,7 @@ class UsersController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'nullable|min:8|confirmed',
         ]);
 

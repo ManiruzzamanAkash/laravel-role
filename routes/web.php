@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\ModulesController;
+use App\Http\Controllers\Backend\RolesController;
+use App\Http\Controllers\Backend\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

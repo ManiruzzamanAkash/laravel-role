@@ -27,12 +27,12 @@ class ModulesController extends Controller
 
     public function toggleStatus(Module $module)
     {
-        $module->update(['status' => !$module->status]);
+        $module->update(['status' => ! $module->status]);
 
         // Find the module in the system.
         $moduleData = ModuleFacade::find(strtolower($module->name));
 
-        if (!$moduleData) {
+        if (! $moduleData) {
             return response()->json(['success' => false, 'message' => 'Module not found.'], 404);
         }
 
@@ -59,9 +59,9 @@ class ModulesController extends Controller
         $filePath = $file->storeAs('modules', $file->getClientOriginalName());
 
         // Extract and install the module.
-        $modulePath = storage_path('app/' . $filePath);
+        $modulePath = storage_path('app/'.$filePath);
         $extractPath = base_path('Modules');
-        $zip = new \ZipArchive();
+        $zip = new \ZipArchive;
         if ($zip->open($modulePath) === true) {
             $moduleName = $zip->getNameIndex(0); // Retrieve the module folder name before closing
             $zip->extractTo($extractPath);
@@ -118,7 +118,7 @@ class ModulesController extends Controller
             Artisan::call('module:disable', ['module' => $moduleData->getName()]);
 
             // Remove the module files.
-            $modulePath = base_path('Modules/' . $moduleData->getName());
+            $modulePath = base_path('Modules/'.$moduleData->getName());
             if (is_dir($modulePath)) {
                 \File::deleteDirectory($modulePath);
             }
@@ -131,6 +131,7 @@ class ModulesController extends Controller
         Artisan::call('cache:clear');
 
         session()->flash('success', 'Module deleted successfully.');
+
         return redirect()->route('admin.modules.index');
     }
 }

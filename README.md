@@ -92,6 +92,8 @@ git remote set-url origin git@github.com:laradashboard/laradashboard.git
 6. Check by login with the new credentials.
 7. If you've not enough permission to do any task, you'll get a warning message.
 8. Dashboard with Beautiful chart integrated
+9. Module Based Development - Custom Module Add/Enable/Disable/Delete
+10. Monitoring - Laravel Pulse
 
 ## Learn More & Discussion
 https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
@@ -127,23 +129,27 @@ https://devsenv.com/tutorials/laravel-role-permission-management-system-full-exa
 **Upload Module**
 ![alt text][moduleCreatePage]
 
+### Monitoring Pages
+**Laravel Pulse**
+![alt text][laravelPulsePage]
+
 ### Other Pages
 Custom Error Pages
 ![alt text][errorPageImage]
 
 
-[dashboardImage]: https://i.ibb.co.com/Kp7VD7kD/dashboard.png "Dashboard Page Laravel Role Management"
-[dashboardDarkMode]: https://i.ibb.co.com/KxGHDWM9/Screenshot-2025-03-26-at-11-12-32-AM.png "Dashboard Page Dark Mode"
-[roleListImage]: https://i.ibb.co.com/ZpBtjZf6/role.png "2-Laravel-Manage-Roles"
-[roleCreateImage]: https://i.ibb.co.com/NdwcDdfB/role-create.png "3-Laravel-Role-Create"
-[roleEditImage]: https://i.ibb.co.com/vxr970jJ/role-edit.png "4-Laravel-Role-Edit"
-[userListImage]:  https://i.ibb.co.com/ymXN6BHc/users.png "5-Laravel-Users-Manage" 
-[userCreateImage]: https://i.ibb.co.com/TMMr1HbR/user-create.png "6-Laravel-User-Create"
-[userLoginImage]: https://i.ibb.co.com/HDXh1G6W/login.png "7-Login-Page"
-[errorPageImage]: https://i.ibb.co.com/Lhz7XH7C/403.png "8 - Error Page Handling"
-[sidebarDyanamic]: https://i.ibb.co/Jpq6X8x/9-Sidebar-Manage-Dynamically.png "9-Sidebar-Manage-Dynamically"
-[moduleListPage]: https://i.ibb.co.com/k62YKzC5/Module-List-Page.png
-[moduleCreatePage]: https://i.ibb.co.com/xqMZ37Cy/Module-Upload-Page.png
+[dashboardImage]: /demo-screenshots/Dashboard%20Page%20white%20Mode.png "Dashboard Page Laravel Role Management"
+[dashboardDarkMode]:  /demo-screenshots/Dashboard%20Page%20Dark%20Mode.png "Dashboard Page Dark Mode"
+[roleListImage]: /demo-screenshots/Role%20List.png "2-Laravel-Manage-Roles"
+[roleCreateImage]: /demo-screenshots/Role%20Create.png "3-Laravel-Role-Create"
+[roleEditImage]: /demo-screenshots/Role%20Edit.png "4-Laravel-Role-Edit"
+[userListImage]:  /demo-screenshots/Users%20List.png "5-Laravel-Users-Manage" 
+[userCreateImage]: /demo-screenshots/User%20Create.png "6-Laravel-User-Create"
+[userLoginImage]: /demo-screenshots/login.png "7-Login-Page"
+[errorPageImage]: /demo-screenshots/Custom%20Error%20Pages.png "8 - Error Page Handling"
+[moduleListPage]: /demo-screenshots/Module%20List.png
+[moduleCreatePage]: /demo-screenshots/Upload%20Module.png
+[laravelPulsePage]: /demo-screenshots/Laravel%20Pulse%20Dashboard%20for%20Monitoring.png
 
 ## Wanna talk with me
 Please mail me at - manirujjamanakash@gmail.com
