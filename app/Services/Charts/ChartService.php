@@ -35,6 +35,7 @@ abstract class ChartService
             $labels->push($currentDate->format($format));
             $currentDate->$intervalMethod();
         }
+
         return $labels;
     }
 }
