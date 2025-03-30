@@ -33,7 +33,7 @@
                 </button>
                 <ul
                     id="roles-submenu"
-                    class="submenu {{ Route::is('admin.roles.*') ? '' : 'hidden' }} pl-8 mt-2 space-y-2"
+                    class="submenu {{ Route::is('admin.roles.*') ? '' : 'hidden' }} pl-12 mt-2 space-y-2"
                 >
                     @if ($user->can('role.view'))
                     <li>
@@ -73,7 +73,7 @@
                 </button>
                 <ul
                     id="users-submenu"
-                    class="submenu {{ Route::is('admin.users.*') ? '' : 'hidden' }} pl-8 mt-2 space-y-2"
+                    class="submenu {{ Route::is('admin.users.*') ? '' : 'hidden' }} pl-12 mt-2 space-y-2"
                 >
                     @if ($user->can('user.view'))
                     <li>
@@ -126,7 +126,7 @@
                 </button>
                 <ul
                     id="monitoring-submenu"
-                    class="submenu hidden pl-8 mt-2 space-y-2"
+                    class="submenu hidden pl-12 mt-2 space-y-2"
                 >
                     @if ($user->can('pulse.view'))
                     <li>

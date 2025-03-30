@@ -13,8 +13,9 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @vite(\App\Models\Module::assets())
     @yield('styles')
+    @yield('before_head')
 
-    @php ld_apply_filters('admin_head', ''); @endphp
+    @php echo ld_apply_filters('admin_head', ''); @endphp
 </head>
 
 <body
