@@ -62,7 +62,7 @@ php artisan storage:link
 
 Migrate Database with seeder -
 ```console
-php artisan migrate:fresh --seed
+php artisan migrate:fresh --seed && php artisan module:seed
 ```
 
 Run Project -
