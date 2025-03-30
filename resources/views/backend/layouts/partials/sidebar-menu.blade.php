@@ -18,6 +18,7 @@
                 </a>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_dashboard', '') @endphp
 
             @if ($user->can('role.create') || $user->can('role.view') || $user->can('role.edit') || $user->can('role.delete'))
             <li>
@@ -57,6 +58,7 @@
                 </ul>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_roles', '') @endphp
 
             @if ($user->can('user.create') || $user->can('user.view') || $user->can('user.edit') || $user->can('user.delete'))
             <li>
@@ -96,6 +98,7 @@
                 </ul>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_users', '') @endphp
 
             @if ($user->can('module.view'))
             <li>
@@ -108,6 +111,7 @@
                 </a>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_modules', '') @endphp
 
             @if ($user->can('pulse.view'))
             <li>
@@ -138,6 +142,7 @@
                 </ul>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_monitoring', '') @endphp
         </ul>
     </div>
 
