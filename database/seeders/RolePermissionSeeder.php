@@ -86,6 +86,7 @@ class RolePermissionSeeder extends Seeder
                 'group_name' => 'monitoring',
                 'permissions' => [
                     'pulse.view',
+                    'actionlog.view',
                 ],
             ],
         ];
