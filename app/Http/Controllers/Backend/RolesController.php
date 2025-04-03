@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Enums\ActionType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Models\User;
+use Auth;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
@@ -54,6 +56,14 @@ class RolesController extends Controller
         }
 
         session()->flash('success', 'Role has been created.');
+
+        $this->storeActionLog(
+            ActionType::CREATED,
+            "New Role added",
+            Auth::user()->name,
+            ['role' => $role]
+        );
+
 
         return redirect()->route('admin.roles.index');
     }
