@@ -91,18 +91,26 @@
 
             @if ($user->can('pulse.view'))
                 <li>
-                    <button class="menu-item group w-full text-left menu-item-inactive text-white" type="button"
+                    <button class="menu-item group w-full text-left {{ Route::is('actionlog.index') ? 'menu-item-active' : 'menu-item-inactive text-white' }}" type="button"
                         onclick="toggleSubmenu('monitoring-submenu')">
                         <i class="bi bi-activity text-xl text-center"></i>
                         <span class="menu-item-text">Monitoring</span>
                         <i class="bi bi-chevron-down ml-auto"></i>
                     </button>
-                    <ul id="monitoring-submenu" class="submenu hidden pl-8 mt-2 space-y-2">
+                    <ul id="monitoring-submenu" class="submenu {{ Route::is('actionlog.index') ? '' : 'hidden' }} pl-8 mt-2 space-y-2">
                         @if ($user->can('pulse.view'))
                             <li>
-                                <a href="{{ route('pulse') }}" class="block px-4 py-2 rounded-lg menu-item-inactive"
+                                <a href="{{ route('pulse') }}" class="block px-4 py-2 rounded-lg {{ Route::is('pulse') ? 'menu-item-active' : 'menu-item-inactive' }}"
                                     target="_blank">
                                     Laravel Pulse
+                                </a>
+                            </li>
+                        @endif
+                        @if ($user->can('actionlog.view'))
+                            <li>
+                                <a href="{{ route('actionlog.index') }}" class="block px-4 py-2 rounded-lg {{ Route::is('actionlog.index') ? 'menu-item-active' : 'menu-item-inactive' }}"
+                                    target="_blank">
+                                    Action Log
                                 </a>
                             </li>
                         @endif
