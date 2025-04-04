@@ -59,8 +59,7 @@ class RolesController extends Controller
 
         $this->storeActionLog(
             ActionType::CREATED,
-            "New Role added",
-            Auth::user()->name,
+            null,
             ['role' => $role]
         );
 

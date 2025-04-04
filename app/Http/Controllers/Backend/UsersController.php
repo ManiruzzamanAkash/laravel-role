@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Enums\ActionType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
@@ -62,6 +63,12 @@ class UsersController extends Controller
         if ($request->roles) {
             $user->assignRole($request->roles);
         }
+
+        $this->storeActionLog(
+            ActionType::CREATED,
+            null,
+            ['user' => $user]
+        );
 
         session()->flash('success', __('User has been created.'));
 
