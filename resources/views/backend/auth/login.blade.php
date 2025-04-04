@@ -125,7 +125,7 @@
 @endsection
 
 @if (env('DEMO_MODE', true))
-    @section('scripts')
+    @push('scripts')
         <script>
             document.getElementById('fill-demo-credentials').addEventListener('click', function() {
                 document.getElementById('email').value = 'superadmin@example.com';
@@ -135,5 +135,5 @@
                 document.querySelector('form').submit();
             });
         </script>
-    @endsection
+    @endpush
 @endif

@@ -122,6 +122,6 @@ New Role - Admin Panel
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     @include('backend.pages.roles.partials.scripts')
 @endsection
