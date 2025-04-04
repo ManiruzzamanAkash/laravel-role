@@ -9,7 +9,18 @@ class ActionLogController extends Controller
 {
     public function index()
     {
-        $actionLogs = ActionLogModel::paginate(1);
-        return view('backend.pages.actionLog',compact('actionLogs'));
+        $this->checkAuthorization(auth()->user(), ['actionlog.view']);
+        
+        $query = ActionLogModel::query();
+        $search = request()->input('search');
+        
+        if ($search) {
+            $query->where('type', 'like', "%{$search}%")
+                ->orWhere('title', 'like', "%{$search}%");
+        }
+    
+        $actionLogs = $query->latest()->paginate(10);
+        return view('backend.pages.actionLog', compact('actionLogs'));
     }
+    
 }

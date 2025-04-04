@@ -4,12 +4,43 @@
     {{ __('Action Logs - Admin Panel') }}
 @endsection
 
+@php
+    $isActionLogExist = false;
+@endphp
 @section('admin-content')
     <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
         <div x-data="{ pageName: 'Action Logs' }">
             <!-- Page Header -->
             <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName">Action Logs</h2>
+                @include('backend.partials.search-form', [
+                    'placeholder' => __('Search by title or type'),
+                ])
+
+                <div class="flex items-center justify-center p-4">
+                    <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        type="button">
+                        Filter by Action Type
+                        <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                        <ul class="space-y-2">
+                            @foreach (\App\Enums\ActionType::cases() as $type)
+                                <li class="cursor-pointer text-sm text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded"
+                                    onclick="handleSelect('{{ $type->value }}')">
+                                    {{ ucfirst($type->value) }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
                 <nav>
                     <ol class="flex items-center gap-1.5">
                         <li>
@@ -55,21 +86,30 @@
                                     <td class="px-5 py-4 sm:px-6 text-left">{{ $loop->index + 1 }}</td>
                                     <td class="px-5 py-4 sm:px-6 text-left">{{ $log->type }}</td>
                                     <td class="px-5 py-4 sm:px-6 text-left">{{ $log->title }}</td>
-                                    <td class="px-5 py-4 sm:px-6 text-left">{{ $log->action_by }}</td>
+                                    <td class="px-5 py-4 sm:px-6 text-left">
+                                        {{ $log->user->name . ' (' . $log->user->username . ')' ?? '' }}</td>
                                     <td class="px-5 py-4 sm:px-6 text-left">
                                         <!-- Button to open the modal -->
-                                        <button id="expand-btn-{{ $log->id }}" class="text-blue-500 text-sm mt-2" data-modal-target="json-modal-{{ $log->id }}" data-modal-toggle="json-modal-{{ $log->id }}">
+                                        <button id="expand-btn-{{ $log->id }}" class="text-blue-500 text-sm mt-2"
+                                            data-modal-target="json-modal-{{ $log->id }}"
+                                            data-modal-toggle="json-modal-{{ $log->id }}">
                                             Expand JSON
                                         </button>
-                                    
+
                                         <!-- Pass the $log variable to the JsonModal component -->
                                         <x-action-log-modal :log="$log" />
                                     </td>
-                                    
+
                                     <td class="px-5 py-4 sm:px-6 text-left">{{ $log->created_at->format('Y-m-d H:i:s') }}
                                     </td>
                                 </tr>
+                                @php
+                                    $isActionLogExist = true;
+                                @endphp
                             @empty
+                                @php
+                                    $isActionLogExist = false;
+                                @endphp
                                 <tr>
                                     <td colspan="5" class="text-center py-4">
                                         <p class="text-gray-500 dark:text-gray-400">{{ __('No action logs found') }}</p>
@@ -90,15 +130,27 @@
 @endsection
 
 
+@if ($isActionLogExist)
+    @push('scripts')
+        <script>
+            document.querySelector('[data-modal-toggle="json-modal-{{ $log->id }}"]').addEventListener('click',
+                function() {
+                    document.getElementById('json-modal-{{ $log->id }}').classList.remove('hidden');
+                });
+
+            document.querySelector('[data-modal-hide="json-modal-{{ $log->id }}"]').addEventListener('click', function() {
+                document.getElementById('json-modal-{{ $log->id }}').classList.add('hidden');
+            });
+        </script>
+    @endpush
+@endif
+
 @push('scripts')
     <script>
-        document.querySelector('[data-modal-toggle="json-modal-{{ $log->id }}"]').addEventListener('click',
-        function() {
-            document.getElementById('json-modal-{{ $log->id }}').classList.remove('hidden');
-        });
-
-        document.querySelector('[data-modal-hide="json-modal-{{ $log->id }}"]').addEventListener('click', function() {
-            document.getElementById('json-modal-{{ $log->id }}').classList.add('hidden');
-        });
+        function handleSelect(value) {
+            let currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('search', value);
+            window.location.href = currentUrl.toString();
+        }
     </script>
 @endpush
