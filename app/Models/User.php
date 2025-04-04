@@ -74,4 +74,9 @@ class User extends Authenticatable
 
         return true; // ensure returning true if all permissions are granted
     }
+
+    public function actionLogs()
+    {
+        return $this->hasMany(ActionLogModel::class, 'action_by');
+    }
 }

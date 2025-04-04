@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('action_log_models', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('action_by')->constrained('users')->onDelete('cascade');
             $table->string('type');
             $table->string('title')->nullable();
-            $table->string('action_by');
             $table->text('data');
             $table->timestamps();
         });

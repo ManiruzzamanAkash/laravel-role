@@ -8,8 +8,13 @@ class ActionLogModel extends Model
 {
     protected $fillable = [
         'type',
-        'title',
         'action_by',
+        'title',
         'data',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'action_by');
+    }
 }
