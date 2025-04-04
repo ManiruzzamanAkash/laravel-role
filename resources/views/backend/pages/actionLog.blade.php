@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    {{ __('Action Logs - Admin Panel') }}
+{{ __('Action Logs - ' . config('app.name') ) }}
 @endsection
 
 @php

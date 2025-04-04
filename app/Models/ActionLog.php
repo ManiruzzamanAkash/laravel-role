@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ActionLogModel extends Model
+class ActionLog extends Model
 {
     protected $fillable = [
         'type',

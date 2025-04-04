@@ -124,4 +124,4 @@ New Role - Admin Panel
 
 @push('scripts')
     @include('backend.pages.roles.partials.scripts')
-@endsection
+@endphp

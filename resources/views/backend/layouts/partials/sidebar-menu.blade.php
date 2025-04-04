@@ -100,16 +100,14 @@
                     <ul id="monitoring-submenu" class="submenu {{ Route::is('actionlog.index') ? '' : 'hidden' }} pl-8 mt-2 space-y-2">
                         @if ($user->can('pulse.view'))
                             <li>
-                                <a href="{{ route('pulse') }}" class="block px-4 py-2 rounded-lg {{ Route::is('pulse') ? 'menu-item-active' : 'menu-item-inactive' }}"
-                                    target="_blank">
+                                <a href="{{ route('pulse') }}" class="block px-4 py-2 rounded-lg {{ Route::is('pulse') ? 'menu-item-active' : 'menu-item-inactive' }}" >
                                     Laravel Pulse
                                 </a>
                             </li>
                         @endif
                         @if ($user->can('actionlog.view'))
                             <li>
-                                <a href="{{ route('actionlog.index') }}" class="block px-4 py-2 rounded-lg {{ Route::is('actionlog.index') ? 'menu-item-active' : 'menu-item-inactive' }}"
-                                    target="_blank">
+                                <a href="{{ route('actionlog.index') }}" class="block px-4 py-2 rounded-lg {{ Route::is('actionlog.index') ? 'menu-item-active' : 'menu-item-inactive' }}" >
                                     Action Log
                                 </a>
                             </li>

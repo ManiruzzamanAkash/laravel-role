@@ -10,4 +10,5 @@ enum ActionType: string
     case VIEWED = 'viewed';
     case APPROVED = 'approved';
     case REJECTED = 'rejected';
+    case EXCEPTION = 'exception';
 }

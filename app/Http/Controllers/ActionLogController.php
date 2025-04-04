@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ActionLogModel;
+use App\Models\ActionLog;
 use Illuminate\Http\Request;
 
 class ActionLogController extends Controller
@@ -11,7 +11,7 @@ class ActionLogController extends Controller
     {
         $this->checkAuthorization(auth()->user(), ['actionlog.view']);
         
-        $query = ActionLogModel::query();
+        $query = ActionLog::query();
         $search = request()->input('search');
         
         if ($search) {

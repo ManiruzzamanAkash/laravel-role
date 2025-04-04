@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('action_log_models', function (Blueprint $table) {
+        Schema::create('action_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('action_by')->constrained('users')->onDelete('cascade');
             $table->string('type');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('action_log_models');
+        Schema::dropIfExists('action_logs');
     }
 };

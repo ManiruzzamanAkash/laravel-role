@@ -3,38 +3,31 @@
 namespace App\Traits;
 
 use App\Enums\ActionType;
-use App\Models\ActionLogModel;
+use App\Models\ActionLog;
 use Auth;
 
 trait HasActionLogTrait
 {
-    /**
-     * Store action log in the database.
-     *
-     * @param ActionType $type
-     * @param string|null $title
-     * @param array $data
-     * @return bool
-     */
-    public function storeActionLog(ActionType $type, ?string $title, array $data): bool
+    public function storeActionLog(ActionType $type, ?string $title, array $data): ?ActionLog
     {
         try {
             if (!$title) {
-                $dataKey = key($data);
-                $name = Auth::user()->username ?? 'Unknown';
-                $title = ucfirst($dataKey) . ' ' . $type->value . ' by ' . $name . ''; 
+                $dataKey = key($data); // Get the first key of the data array
+                $name = Auth::user()->username ?? 'Unknown'; // Get the authenticated user's username, fallback to 'Unknown'
+                $title = ucfirst($dataKey) . ' ' . $type->value . ' by ' . $name;
             }
-
-            $actionLog = ActionLogModel::create([
+    
+            $actionLog = ActionLog::create([
                 'type' => $type->value,
                 'title' => $title,
-                'action_by' => auth()->id(),
-                'data' => json_encode($data),
+                'action_by' => auth()->id(), // Store the user's ID who triggered the action
+                'data' => json_encode($data), // Store the action data as JSON
             ]);
-
-            return $actionLog ? true : false;
+    
+            return $actionLog;
         } catch (\Exception $e) {
-            return false;
+            return null;
         }
     }
+    
 }

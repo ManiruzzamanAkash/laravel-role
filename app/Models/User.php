@@ -77,6 +77,6 @@ class User extends Authenticatable
 
     public function actionLogs()
     {
-        return $this->hasMany(ActionLogModel::class, 'action_by');
+        return $this->hasMany(ActionLog::class, 'action_by');
     }
 }
