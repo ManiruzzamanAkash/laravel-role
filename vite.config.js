@@ -15,6 +15,9 @@ let allPaths = [];
     allPaths = await collectModuleAssetsPaths(paths, 'Modules');
 })();
 
+if (allPaths.length === 0) {
+    allPaths = paths;
+}
 
 export default defineConfig({
     plugins: [
@@ -27,6 +30,6 @@ export default defineConfig({
     ],
     esbuild: {
         jsx: 'automatic',
-        drop: ['console', 'debugger'],
+        // drop: ['console', 'debugger'],
     },
 });

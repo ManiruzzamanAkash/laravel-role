@@ -42,17 +42,17 @@
                     </a>
                 @endif
             </div>
-            <div class="p-3 space-y-3 border-t border-gray-100 dark:border-gray-800 sm:p-3 overflow-x-auto">
+            <div class="space-y-3 border-t border-gray-100 dark:border-gray-800 overflow-x-auto">
                 @include('backend.layouts.partials.messages')
                 <table id="dataTable" class="w-full dark:text-gray-400">
                     <thead class="bg-light text-capitalize">
                         <tr class="border-b border-gray-100 dark:border-gray-800">
-                            <th width="5%">{{ __('Sl') }}</th>
-                            <th width="15%">{{ __('Name') }}</th>
-                            <th width="10%">{{ __('Email') }}</th>
-                            <th width="30%">{{ __('Roles') }}</th>
+                            <th width="5%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Sl') }}</th>
+                            <th width="15%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Name') }}</th>
+                            <th width="10%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Email') }}</th>
+                            <th width="30%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Roles') }}</th>
                             @php ld_apply_filters('user_list_page_table_header_before_action', '') @endphp
-                            <th width="15%">{{ __('Action') }}</th>
+                            <th width="15%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Action') }}</th>
                             @php ld_apply_filters('user_list_page_table_header_after_action', '') @endphp
                         </tr>
                     </thead>
@@ -132,7 +132,7 @@
                     </tbody>
                 </table>
 
-                <div class="mt-4">
+                <div class="my-4 px-4 sm:px-6">
                     {{ $users->links() }}
                 </div>
             </div>
