@@ -102,7 +102,7 @@
 
         <div class="flex flex-col items-center max-w-xs">
           <a href="#" class="block mb-4">
-            <img src="/images/logo/lara-dashboard.png" alt="Logo">
+            <img src="/images/logo/lara-dashboard-dark.png" alt="Logo">
           </a>
           <p class="text-center text-gray-400 dark:text-white/60">
             Free and Open-Source Laravel Admin Dashboard Template

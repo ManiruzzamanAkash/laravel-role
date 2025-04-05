@@ -6,17 +6,17 @@
     <!-- Sidebar Header -->
     <div
         :class="sidebarToggle ? 'justify-center' : 'justify-between'"
-        class="justify-center flex items-center gap-2 pt-4 sidebar-header pb-4"
+        class="justify-center flex items-center gap-2 sidebar-header py-6"
     >
         <a href="{{ route('admin.dashboard') }}">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
                 <img
-                    class="dark:hidden h-20"
+                    class="dark:hidden"
                     src="/images/logo/lara-dashboard-dark.png"
                     alt="Logo"
                 />
                 <img
-                    class="hidden dark:block h-20"
+                    class="hidden dark:block"
                     src="/images/logo/lara-dashboard-dark.png"
                     alt="Logo"
                 />
