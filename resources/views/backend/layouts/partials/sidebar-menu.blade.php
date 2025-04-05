@@ -108,7 +108,7 @@
                         @if ($user->can('actionlog.view'))
                             <li>
                                 <a href="{{ route('actionlog.index') }}" class="block px-4 py-2 rounded-lg {{ Route::is('actionlog.index') ? 'menu-item-active' : 'menu-item-inactive' }}" >
-                                    Action Log
+                                    Action Logs
                                 </a>
                             </li>
                         @endif
