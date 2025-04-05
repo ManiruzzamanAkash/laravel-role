@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('title')
-Dashboard Page - LaraAdmin
+Dashboard Page - {{ config('app.name') }}
 @endsection
 
 @section('before_vite_build')
@@ -15,7 +15,7 @@ Dashboard Page - LaraAdmin
 <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
     <div class="grid grid-cols-12 gap-4 md:gap-6">
         <div class="col-span-12 space-y-6">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6">
+            <div class="grid grid-cols-3 gap-4 md:grid-cols-5 md:gap-6">
                 <div
                     class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6"
                 >
@@ -60,7 +60,6 @@ Dashboard Page - LaraAdmin
                         </div>
                     </div>
                 </div>
-
                 <div
                     class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6"
                 >
