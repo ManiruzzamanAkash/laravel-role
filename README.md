@@ -1,6 +1,6 @@
-<img src="https://demo.laradashboard.com/images/logo/lara-dashboard.png" style="width: 100%;"/>
+<img src="/public/images/logo/lara-dashboard.png" style="width: 90%;" />
 
-**Lara Dashboard** - A project which manages Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel with Tailwind CSS integrated with all starting features including dark/lite mode, charts, tables, forms and so on...
+**Lara Dashboard** - A project which manages Role, Permissions and every actions of your Laravel application. A complete solution for Role based Access Control in Laravel with Tailwind CSS integrated with all starting features including dark/lite mode, charts, tables, logs, forms and so on...
 
 **Demo:** https://demo.laradashboard.com/
 ```
@@ -32,46 +32,43 @@ password - 12345678
 
 - Laravel `12.x` & Tail Admin Template Integration
     - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x-tailadmin
+
+- Laravel `12.x` & Module & Action Log integration
+    - Tag - https://github.com/ManiruzzamanAkash/laravel-role/releases/tag/Laravel12.x-module-logs
  
 ## Project Setup
-Git clone -
+**Clone and Go Project**
 ```console
 git clone git@github.com:laradashboard/laradashboard.git
-```
-
-Go to project folder -
-```console
 cd laradashboard
 ```
 
-Install Composer & Node Dependencies -
+**Install Composer & Node Dependencies**
 ```console
 composer install
 npm install
 ```
 
-Create database called - `laradashboard`
+**Database & env creation**
+- Create database called - `laradashboard`
+- Create `.env` file by copying `.env.example` file
 
-Create `.env` file by copying `.env.example` file
-
-Generate Artisan Key or necessary linkings
+**Generate Artisan Key or necessary linkings**
 ```console
 php artisan key:generate
 php artisan storage:link
 ```
 
-Migrate Database with seeder -
+**Migrate Database with seeder**
 ```console
 php artisan migrate:fresh --seed && php artisan module:seed
 ```
 
-Run Project -
+**Run Project**
 ```php
 php artisan serve
 npm run dev
 ```
-
-Since, there is any problem to seeder, Please import the .sql file directly - https://github.com/laradashboard/laradashboard/blob/master/database/sql/laradashboard.sql
 
 So, You've got the project of Laravel Role & Permission Management on your http://localhost:8000
 
@@ -93,6 +90,7 @@ git remote set-url origin git@github.com:laradashboard/laradashboard.git
 7. If you've not enough permission to do any task, you'll get a warning message.
 8. Dashboard with Beautiful chart integrated
 9. Module Based Development - Custom Module Add/Enable/Disable/Delete
+10. Monitoring - Every action logs of your application
 10. Monitoring - Laravel Pulse
 
 ## Learn More & Discussion
