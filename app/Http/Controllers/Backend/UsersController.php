@@ -64,11 +64,7 @@ class UsersController extends Controller
             $user->assignRole($request->roles);
         }
 
-        $this->storeActionLog(
-            ActionType::CREATED,
-            null,
-            ['user' => $user]
-        );
+        $this->storeActionLog(ActionType::CREATED, ['user' => $user]);
 
         session()->flash('success', __('User has been created.'));
 
@@ -118,6 +114,8 @@ class UsersController extends Controller
             $user->assignRole($request->roles);
         }
 
+        $this->storeActionLog(ActionType::UPDATED, ['user' => $user]);
+
         session()->flash('success', 'User has been updated.');
 
         return back();
@@ -132,6 +130,8 @@ class UsersController extends Controller
         $user->delete();
         $user = ld_apply_filters('user_delete_after', $user);
         session()->flash('success', 'User has been deleted.');
+
+        $this->storeActionLog(ActionType::DELETED, ['user' => $user]);
 
         ld_do_action('user_delete_after', $user);
 
@@ -151,7 +151,7 @@ class UsersController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
         ]);
 
@@ -166,6 +166,8 @@ class UsersController extends Controller
         ld_do_action('user_profile_update_after', $user);
 
         session()->flash('success', 'Profile updated successfully.');
+
+        $this->storeActionLog(ActionType::UPDATED, ['profile' => $user]);
 
         return redirect()->route('profile.edit');
     }

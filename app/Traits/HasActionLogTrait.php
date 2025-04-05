@@ -8,7 +8,7 @@ use Auth;
 
 trait HasActionLogTrait
 {
-    public function storeActionLog(ActionType $type, ?string $title, array $data): ?ActionLog
+    public function storeActionLog(ActionType $type, array $data, ?string $title = null): ?ActionLog
     {
         try {
             if (!$title) {
@@ -16,18 +16,17 @@ trait HasActionLogTrait
                 $name = Auth::user()->username ?? 'Unknown'; // Get the authenticated user's username, fallback to 'Unknown'
                 $title = ucfirst($dataKey) . ' ' . $type->value . ' by ' . $name;
             }
-    
+
             $actionLog = ActionLog::create([
                 'type' => $type->value,
                 'title' => $title,
                 'action_by' => auth()->id(), // Store the user's ID who triggered the action
                 'data' => json_encode($data), // Store the action data as JSON
             ]);
-    
+
             return $actionLog;
         } catch (\Exception $e) {
             return null;
         }
     }
-    
 }

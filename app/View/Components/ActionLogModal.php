@@ -12,7 +12,7 @@ class ActionLogModal extends Component
     /**
      * Create a new component instance.
      *
-     * @param mixed $log
+     * @param  mixed  $log
      */
     public function __construct($log)
     {

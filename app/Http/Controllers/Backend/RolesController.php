@@ -8,7 +8,6 @@ use App\Enums\ActionType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Models\User;
-use Auth;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
@@ -47,8 +46,6 @@ class RolesController extends Controller
 
         // Process Data.
         $role = Role::create(['name' => $request->name]);
-
-        // $role = DB::table('roles')->where('name', $request->name)->first();
         $permissions = $request->input('permissions');
 
         if (! empty($permissions)) {
@@ -57,12 +54,7 @@ class RolesController extends Controller
 
         session()->flash('success', 'Role has been created.');
 
-        $this->storeActionLog(
-            ActionType::CREATED,
-            null,
-            ['role' => $role]
-        );
-
+        $this->storeActionLog(ActionType::CREATED, ['role' => $role]);
 
         return redirect()->route('admin.roles.index');
     }
@@ -101,6 +93,8 @@ class RolesController extends Controller
             $role->name = $request->name;
             $role->save();
             $role->syncPermissions($permissions);
+
+            $this->storeActionLog(ActionType::UPDATED, ['role' => $role]);
         }
 
         session()->flash('success', 'Role has been updated.');
@@ -120,6 +114,7 @@ class RolesController extends Controller
         }
 
         $role->delete();
+        $this->storeActionLog(ActionType::DELETED, ['role' => $role]);
         session()->flash('success', 'Role has been deleted.');
 
         return redirect()->route('admin.roles.index');
