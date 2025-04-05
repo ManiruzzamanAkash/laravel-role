@@ -28,7 +28,7 @@
     <!-- Users Table -->
     <div class="space-y-6">
         <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="px-5 py-4 sm:px-6 sm:py-5 flex justify-between items-center">
+          <div class="px-5 py-4 sm:px-6 sm:py-5 flex justify-between items-center">
                 <h3 class="text-base font-medium text-gray-800 dark:text-white/90">Users</h3>
 
                 @include('backend.partials.search-form', [
@@ -58,7 +58,7 @@
                     </thead>
                     <tbody>
                         @forelse ($users as $user)
-                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                            <tr class="{{ $loop->index + 1 != count($users) ?  'border-b border-gray-100 dark:border-gray-800' : '' }}">
                                 <td class="px-5 py-4 sm:px-6">{{ $loop->index + 1 }}</td>
                                 <td class="px-5 py-4 sm:px-6 flex items-center md:min-w-[200px]">
                                     <img src="{{ ld_apply_filters('user_list_page_avatar_item', $user->getGravatarUrl(40), $user) }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full mr-3">

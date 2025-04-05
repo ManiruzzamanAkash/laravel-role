@@ -1,25 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Models\ActionLog;
+use App\Services\ActionLogService;
 
 class ActionLogController extends Controller
 {
+    public function __construct(private readonly ActionLogService $actionLogService)
+    {
+    }
+
     public function index()
     {
         $this->checkAuthorization(auth()->user(), ['actionlog.view']);
 
-        $query = ActionLog::query();
-        $search = request()->input('search');
-
-        if ($search) {
-            $query->where('type', 'like', "%{$search}%")
-                ->orWhere('title', 'like', "%{$search}%");
-        }
-
-        $actionLogs = $query->latest()->paginate(10);
-
-        return view('backend.pages.actionLog', compact('actionLogs'));
+        return view('backend.pages.action-logs.index', [
+            'actionLogs' => $this->actionLogService->getActionLogs(),
+        ]);
     }
 }
