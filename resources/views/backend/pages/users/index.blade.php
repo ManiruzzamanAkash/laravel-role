@@ -28,7 +28,7 @@
     <!-- Users Table -->
     <div class="space-y-6">
         <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <div class="px-5 py-4 sm:px-6 sm:py-5 flex justify-between items-center">
+          <div class="px-5 py-4 sm:px-6 sm:py-5 flex justify-between items-center">
                 <h3 class="text-base font-medium text-gray-800 dark:text-white/90">Users</h3>
 
                 @include('backend.partials.search-form', [
@@ -42,30 +42,30 @@
                     </a>
                 @endif
             </div>
-            <div class="p-3 space-y-3 border-t border-gray-100 dark:border-gray-800 sm:p-3 overflow-x-auto">
+            <div class="space-y-3 border-t border-gray-100 dark:border-gray-800 overflow-x-auto">
                 @include('backend.layouts.partials.messages')
                 <table id="dataTable" class="w-full dark:text-gray-400">
                     <thead class="bg-light text-capitalize">
                         <tr class="border-b border-gray-100 dark:border-gray-800">
-                            <th width="5%">{{ __('Sl') }}</th>
-                            <th width="15%">{{ __('Name') }}</th>
-                            <th width="10%">{{ __('Email') }}</th>
-                            <th width="30%">{{ __('Roles') }}</th>
+                            <th width="5%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Sl') }}</th>
+                            <th width="15%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Name') }}</th>
+                            <th width="10%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Email') }}</th>
+                            <th width="30%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Roles') }}</th>
                             @php ld_apply_filters('user_list_page_table_header_before_action', '') @endphp
-                            <th width="15%">{{ __('Action') }}</th>
+                            <th width="15%" class="p-2 bg-gray-50 dark:bg-gray-800 dark:text-white text-left px-5">{{ __('Action') }}</th>
                             @php ld_apply_filters('user_list_page_table_header_after_action', '') @endphp
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($users as $user)
-                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                            <tr class="{{ $loop->index + 1 != count($users) ?  'border-b border-gray-100 dark:border-gray-800' : '' }}">
                                 <td class="px-5 py-4 sm:px-6">{{ $loop->index + 1 }}</td>
                                 <td class="px-5 py-4 sm:px-6 flex items-center md:min-w-[200px]">
                                     <img src="{{ ld_apply_filters('user_list_page_avatar_item', $user->getGravatarUrl(40), $user) }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full mr-3">
                                     {{ $user->name }}
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">{{ $user->email }}</td>
-                                <td class="px-5 py-4 sm:px-6 text-center">
+                                <td class="px-5 py-4 sm:px-6">
                                     @foreach ($user->roles as $role)
                                         <span class="capitalize inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white">
                                             {{ $role->name }}
@@ -132,7 +132,7 @@
                     </tbody>
                 </table>
 
-                <div class="mt-4">
+                <div class="my-4 px-4 sm:px-6">
                     {{ $users->links() }}
                 </div>
             </div>

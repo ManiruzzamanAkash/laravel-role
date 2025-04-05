@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function collectModuleAssetsPaths(paths, modulesPath) {
+  const mainPaths = paths || [];
   modulesPath = path.join(__dirname, modulesPath);
 
   const moduleStatusesPath = path.join(__dirname, 'modules_statuses.json');
@@ -30,20 +31,22 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
         const viteConfigPath = path.join(modulesPath, moduleDir, 'vite.config.js');
 
         try {
-          await fs.access(viteConfigPath);
-          // Convert to a file URL for Windows compatibility
-          const moduleConfigURL = pathToFileURL(viteConfigPath);
-
-          // Import the module-specific Vite configuration
-          const moduleConfig = await import(moduleConfigURL.href);
-
-          if (moduleConfig.default && moduleConfig.default.paths && Array.isArray(moduleConfig.default.paths)) {
-            paths.push(...moduleConfig.default.paths);
-          } else {
-            console.error(`Error: module ${moduleDir} does not have a paths array in vite.config.js`);
-          }
+          await fs.access(viteConfigPath); // Check if the file exists and is accessible
         } catch (error) {
-          console.error(`Error importing vite.config.js for module ${moduleDir}: ${error}`);
+          console.error(`vite.config.js not found or inaccessible for module ${moduleDir}: ${error.message}`);
+          continue; // Skip this module if the file is not accessible
+        }
+
+        // Convert to a file URL for Windows compatibility
+        const moduleConfigURL = pathToFileURL(viteConfigPath);
+
+        // Import the module-specific Vite configuration
+        const moduleConfig = await import(moduleConfigURL.href);
+
+        if (moduleConfig.default && moduleConfig.default.paths && Array.isArray(moduleConfig.default.paths)) {
+          mainPaths.push(...moduleConfig.default.paths);
+        } else {
+          console.error(`Error: module ${moduleDir} does not have a paths array in vite.config.js`);
         }
       }
     }
@@ -51,7 +54,7 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
     console.error(`Error reading module statuses or module configurations: ${error}`);
   }
 
-  return paths;
+  return mainPaths;
 }
 
 export default collectModuleAssetsPaths;

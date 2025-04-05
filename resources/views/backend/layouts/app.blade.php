@@ -11,10 +11,11 @@
 
     @viteReactRefresh
     @vite(['resources/js/app.js', 'resources/css/app.css'])
-    @vite(\App\Models\Module::assets())
+    @vite(get_module_asset_paths())
     @yield('styles')
+    @yield('before_head')
 
-    @php ld_apply_filters('admin_head', ''); @endphp
+    @php echo ld_apply_filters('admin_head', ''); @endphp
 </head>
 
 <body
@@ -58,7 +59,7 @@
         </div>
     </div>
 
-    @yield('scripts')
+    @stack('scripts')
 </body>
 
 </html>

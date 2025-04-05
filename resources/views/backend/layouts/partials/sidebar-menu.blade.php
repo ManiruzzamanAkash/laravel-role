@@ -8,16 +8,15 @@
 
         <ul class="flex flex-col gap-4 mb-6">
             @if ($user->can('dashboard.view'))
-            <li>
-                <a
-                    href="{{ route('admin.dashboard') }}"
-                    class="menu-item group {{ Route::is('admin.dashboard') ? 'menu-item-active' : 'menu-item-inactive' }}"
-                >
-                    <i class="bi bi-grid text-xl text-center"></i>
-                    <span class="menu-item-text">Dashboard</span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="menu-item group {{ Route::is('admin.dashboard') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                        <i class="bi bi-grid text-xl text-center"></i>
+                        <span class="menu-item-text">Dashboard</span>
+                    </a>
+                </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_dashboard', '') @endphp
 
             @if ($user->can('role.create') || $user->can('role.view') || $user->can('role.edit') || $user->can('role.delete'))
             <li>
@@ -32,7 +31,7 @@
                 </button>
                 <ul
                     id="roles-submenu"
-                    class="submenu {{ Route::is('admin.roles.*') ? '' : 'hidden' }} pl-8 mt-2 space-y-2"
+                    class="submenu {{ Route::is('admin.roles.*') ? '' : 'hidden' }} pl-12 mt-2 space-y-2"
                 >
                     @if ($user->can('role.view'))
                     <li>
@@ -57,6 +56,7 @@
                 </ul>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_roles', '') @endphp
 
             @if ($user->can('user.create') || $user->can('user.view') || $user->can('user.edit') || $user->can('user.delete'))
             <li>
@@ -71,7 +71,7 @@
                 </button>
                 <ul
                     id="users-submenu"
-                    class="submenu {{ Route::is('admin.users.*') ? '' : 'hidden' }} pl-8 mt-2 space-y-2"
+                    class="submenu {{ Route::is('admin.users.*') ? '' : 'hidden' }} pl-12 mt-2 space-y-2"
                 >
                     @if ($user->can('user.view'))
                     <li>
@@ -96,23 +96,23 @@
                 </ul>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_users', '') @endphp
 
             @if ($user->can('module.view'))
-            <li>
-                <a
-                    href="{{ route('admin.modules.index') }}"
-                    class="menu-item group {{ Route::is('admin.modules.index') ? 'menu-item-active' : 'menu-item-inactive' }}"
-                >
-                    <i class="bi bi-box text-xl text-center"></i>
-                    <span class="menu-item-text">Modules</span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('admin.modules.index') }}"
+                        class="menu-item group {{ Route::is('admin.modules.index') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                        <i class="bi bi-box text-xl text-center"></i>
+                        <span class="menu-item-text">Modules</span>
+                    </a>
+                </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_modules', '') @endphp
 
-            @if ($user->can('pulse.view'))
+            @if ($user->can('pulse.view') || $user->can('actionlog.view'))
             <li>
                 <button
-                    class="menu-item group w-full text-left menu-item-inactive text-white"
+                    class="menu-item group w-full text-left menu-item-inactive text-white {{ Route::is('actionlog.*') ? 'menu-item-active' : 'menu-item-inactive text-white' }}"
                     type="button"
                     onclick="toggleSubmenu('monitoring-submenu')"
                 >
@@ -122,8 +122,16 @@
                 </button>
                 <ul
                     id="monitoring-submenu"
-                    class="submenu hidden pl-8 mt-2 space-y-2"
+                    class="submenu {{ Route::is('actionlog.*') ? '' : 'hidden' }} pl-12 mt-2 space-y-2"
                 >
+                    @if ($user->can('actionlog.view'))
+                        <li>
+                            <a href="{{ route('actionlog.index') }}" class="block px-4 py-2 rounded-lg {{ Route::is('actionlog.index') ? 'menu-item-active' : 'menu-item-inactive text-white' }}" >
+                                Action Logs
+                            </a>
+                        </li>
+                    @endif
+
                     @if ($user->can('pulse.view'))
                     <li>
                         <a
@@ -138,6 +146,7 @@
                 </ul>
             </li>
             @endif
+            @php echo ld_apply_filters('sidebar_menu_after_monitoring', '') @endphp
         </ul>
     </div>
 
@@ -152,15 +161,9 @@
             <li class="menu-item-inactive rounded-md ">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button
-                        type="submit"
-                        class="menu-item group w-full text-left"
-                    >
+                    <button type="submit" class="menu-item group w-full text-left">
                         <i class="bi bi-box-arrow-right text-xl text-center dark:text-white/90"></i>
-                        <span
-                            class="menu-item-text dark:text-white/90"
-                            :class="sidebarToggle ? 'lg:hidden' : ''"
-                        >
+                        <span class="menu-item-text dark:text-white/90" :class="sidebarToggle ? 'lg:hidden' : ''">
                             Logout
                         </span>
                     </button>

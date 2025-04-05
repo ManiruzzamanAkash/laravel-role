@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActionLogController;
 use App\Http\Controllers\Backend\Auth\ForgotPasswordController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -28,6 +29,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@redirectAdmin')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/action-log', [ActionLogController::class, 'index'])->name('actionlog.index');
 
 /**
  * Admin routes
@@ -50,7 +52,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     // Modules Routes.
     Route::get('/modules', [ModulesController::class, 'index'])->name('modules.index');
-    Route::post('/modules/{module}/toggle-status', [ModulesController::class, 'toggleStatus'])->name('modules.toggle-status');
+    Route::post('/modules/toggle-status/{module}', [ModulesController::class, 'toggleStatus'])->name('modules.toggle-status');
     Route::post('/modules/upload', [ModulesController::class, 'upload'])->name('modules.upload');
     Route::delete('/admin/modules/{module}', [ModulesController::class, 'destroy'])->name('modules.delete');
 })->middleware('auth');
