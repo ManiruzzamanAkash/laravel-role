@@ -128,6 +128,7 @@
     @push('scripts')
         <script>
             document.getElementById('fill-demo-credentials').addEventListener('click', function() {
+              console.log('clicked');
                 document.getElementById('email').value = 'superadmin@example.com';
                 document.querySelector('input[name="password"]').value = '12345678';
 
