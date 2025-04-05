@@ -128,6 +128,9 @@ https://devsenv.com/tutorials/laravel-role-permission-management-system-full-exa
 ![alt text][moduleCreatePage]
 
 ### Monitoring Pages
+**Action Logs**
+![alt text][actionLogsPage]
+
 **Laravel Pulse**
 ![alt text][laravelPulsePage]
 
@@ -147,6 +150,7 @@ Custom Error Pages
 [errorPageImage]: /demo-screenshots/Custom%20Error%20Pages.png "8 - Error Page Handling"
 [moduleListPage]: /demo-screenshots/Module%20List.png
 [moduleCreatePage]: /demo-screenshots/Upload%20Module.png
+[actionLogsPage]: /demo-screenshots/Action%20Log%20List.png
 [laravelPulsePage]: /demo-screenshots/Laravel%20Pulse%20Dashboard%20for%20Monitoring.png
 
 ## Wanna talk with me
