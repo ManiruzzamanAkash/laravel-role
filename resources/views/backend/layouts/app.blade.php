@@ -11,7 +11,7 @@
 
     @viteReactRefresh
     @vite(['resources/js/app.js', 'resources/css/app.css'])
-    @vite(\App\Models\Module::assets())
+    @vite(get_module_asset_paths())
     @yield('styles')
     @yield('before_head')
 

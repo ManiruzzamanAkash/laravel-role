@@ -52,7 +52,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     // Modules Routes.
     Route::get('/modules', [ModulesController::class, 'index'])->name('modules.index');
-    Route::post('/modules/{module}/toggle-status', [ModulesController::class, 'toggleStatus'])->name('modules.toggle-status');
+    Route::post('/modules/toggle-status/{module}', [ModulesController::class, 'toggleStatus'])->name('modules.toggle-status');
     Route::post('/modules/upload', [ModulesController::class, 'upload'])->name('modules.upload');
     Route::delete('/admin/modules/{module}', [ModulesController::class, 'destroy'])->name('modules.delete');
 })->middleware('auth');

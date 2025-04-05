@@ -1,15 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('title')
-New Role - Admin Panel
+New Role - {{ config('app.name') }}
 @endsection
 
 @section('styles')
-<style>
-    . {
-        text-transform: capitalize;
-    }
-</style>
+
 @endsection
 
 
@@ -124,4 +120,4 @@ New Role - Admin Panel
 
 @push('scripts')
     @include('backend.pages.roles.partials.scripts')
-@endphp
+@endpush
