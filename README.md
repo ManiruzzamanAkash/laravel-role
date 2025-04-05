@@ -90,7 +90,7 @@ git remote set-url origin git@github.com:laradashboard/laradashboard.git
 7. If you've not enough permission to do any task, you'll get a warning message.
 8. Dashboard with Beautiful chart integrated
 9. Module Based Development - Custom Module Add/Enable/Disable/Delete
-10. Monitoring - Every action logs of your application
+10. Monitoring - Logging of every action of your application
 10. Monitoring - Laravel Pulse
 
 ## Learn More & Discussion
