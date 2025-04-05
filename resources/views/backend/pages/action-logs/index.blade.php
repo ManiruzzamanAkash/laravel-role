@@ -104,7 +104,8 @@
                                         <x-action-log-modal :log="$log" />
                                     </td>
 
-                                    <td class="px-5 py-4 sm:px-6 text-left">{{ $log->created_at->format('Y-m-d H:i:s') }}
+                                    <td class="px-5 py-4 sm:px-6 text-left">
+                                        {{ $log->created_at->format('d M Y H:i A') }}
                                     </td>
                                 </tr>
                                 @php

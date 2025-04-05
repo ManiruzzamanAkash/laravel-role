@@ -65,7 +65,7 @@
                                     {{ $user->name }}
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">{{ $user->email }}</td>
-                                <td class="px-5 py-4 sm:px-6 text-center">
+                                <td class="px-5 py-4 sm:px-6">
                                     @foreach ($user->roles as $role)
                                         <span class="capitalize inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white">
                                             {{ $role->name }}

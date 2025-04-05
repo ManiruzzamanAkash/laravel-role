@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Enums\ActionType;
 use App\Http\Controllers\Controller;
 use App\Models\Module;
 use Illuminate\Http\Request;
@@ -90,6 +91,7 @@ class ModulesController extends Controller
 
                 session()->flash('success', 'Module uploaded and registered successfully.');
             } else {
+                $this->storeActionLog(ActionType::EXCEPTION, ['module' => $moduleName]);
                 session()->flash('error', 'Failed to find the module in the system.');
             }
 
@@ -104,6 +106,7 @@ class ModulesController extends Controller
 
             session()->flash('success', 'Module uploaded and installed successfully.');
         } else {
+            $this->storeActionLog(ActionType::EXCEPTION, ['zip_upload' => 'Failed to open the zip file.']);
             session()->flash('error', 'Failed to extract the module.');
         }
 
